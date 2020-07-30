@@ -31,6 +31,7 @@ From: nvcr.io/nvidia/cuda:10.2-cudnn7-runtime-ubi8
     pip3.8 install comet_ml
     pip3.8 install jupyter
 
+    pip3.8 install astropy
 
 %environment
 
