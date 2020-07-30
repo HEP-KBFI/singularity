@@ -1,4 +1,4 @@
-# singularity images for HEP-KBFI
+# Custom libraries on the KBFI cluster
 
 We use a software layer [singularity](https://sylabs.io/singularity/) that allows every user to create an isolated environment or "singularity image" for themselves in which they can install anything they wish. It's widely used by the LHC grid and by multiple HPC sites.
 
