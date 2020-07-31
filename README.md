@@ -53,17 +53,19 @@ We have 10x GPUs located in the cluster, you can use them using the batch system
 
 ```bash
 #run a single command
-srun sbatch --gpus=1 -p gpu nvidia-smi -L
+srun --gpus=1 -p gpu nvidia-smi -L
 
 #run an interactive shell
-srun sbatch --gpus=1 -p gpu --pty /bin/bash
+srun --gpus=1 -p gpu --pty /bin/bash
 
 #run a batch script
 sbatch --gpus=1 -p gpu script.sh
 ```
 
-Where an example batch script can be as follows:
+Here is an example batch script where we do a tensorflow training using the singularity image:
 ```bash
 #!/bin/bash
-singularity exec -B /scratch -B /home --nv /home/software/singularity/base.simg:latest python3 my_tensorflow_training.py
+singularity exec -B /scratch -B /home --nv \
+  /home/software/singularity/base.simg:latest \
+  python3 my_tensorflow_training.py
 ```
