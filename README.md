@@ -32,27 +32,24 @@ We have the following software packages available:
   - jupyter
 
 # Building the image yourself
-Anyone can build the image on any Linux system on which you have root access. This can be your personal laptop or desktop, or you can use the [Syslabs Remote Builder](https://cloud.sylabs.io/builder).
+Anyone can build the image on any Linux system on which you have root access. This can be your personal laptop or desktop, or you can use the [Syslabs Remote Builder](https://cloud.sylabs.io/builder) on manivald.
 
 ```bash
+#as root on your personal linux machine, copy the image to manivald later
 sudo singularity build base.simg specs/base.singularity
 
-#using the remote builder (create an account first)
-sudo singularity build -r base.simg specs/base.singularity
+#using the remote builder on manivald (create a syslabs account first)
+singularity build -r base.simg specs/base.singularity
 ```
-
-Currently, you cannot build the image on `manivald` itself.
 
 # Adding software to the image
 Add the necessary libraries using a pull request by editing the [spec file](specs).
 
-
 # Using the GPUs on the cluster
-
-We have 10x GPUs located in the cluster, you can use them using the batch system:
+We have 10x GPUs available using the batch system:
 
 ```bash
-#run a single command
+#run a single command, requesting one GPU
 srun --gpus=1 -p gpu nvidia-smi -L
 
 #run an interactive shell
@@ -65,6 +62,10 @@ sbatch --gpus=1 -p gpu script.sh
 Here is an example batch script where we do a tensorflow training using the singularity image:
 ```bash
 #!/bin/bash
+
+#the following environment variable contains the allocated GPUs
+echo $CUDA_VISIBLE_DEVICES
+
 singularity exec -B /scratch -B /home --nv \
   /home/software/singularity/base.simg:latest \
   python3 my_tensorflow_training.py
