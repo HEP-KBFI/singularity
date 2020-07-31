@@ -44,7 +44,7 @@ sudo singularity build -r base.simg specs/base.singularity
 Currently, you cannot build the image on `manivald` itself.
 
 # Adding software to the image
-Add the necessary libraries using a pull request by editing the spec file.
+Add the necessary libraries using a pull request by editing the [spec file](specs).
 
 
 # Using the GPUs on the cluster
