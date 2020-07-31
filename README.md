@@ -11,20 +11,20 @@ Basically, this means that instead of executing directly
 which will fail due to missing libraries, you run
 
 ```bash
-[manivald]$ singularity shell /scratch/0/singularity/images/base.simg:latest
+[manivald]$ singularity shell /home/software/singularity/base.simg:latest
 Singularity> python3 my_program.py
 
 or
 
-[manivald]$ singularity exec /scratch/0/singularity/images/base.simg:latest python3 my_program.py
+[manivald]$ singularity exec /home/software/singularity/base.simg:latest python3 my_program.py
 ```
 
-such that your program runs within the environment defined in `/scratch/0/singularity/images/base.simg`.
+such that your program runs within the environment defined in `/home/software/singularity/base.simg:latest`.
 
 This extra step is necessary to allow multiple users to work on the same system, even if they require mutually incompatible libraries. It also means that the user can directly install any software they wish, rather than waiting for the admin to do it.
 
 We have the following software packages available:
-- `/scratch/0/singularity/images/base.simg:latest`: defined by [base.singularity](specs/base.singularity)
+- `/home/software/singularity/base.simg:latest`: defined by [base.singularity](specs/base.singularity)
   - CUDA 10.2
   - tensorflow 2.3, pytorch 1.5
   - numpy, scipy, sklearn, numba
@@ -32,15 +32,38 @@ We have the following software packages available:
   - jupyter
 
 # Building the image yourself
-
 Anyone can build the image on any Linux system on which you have root access. This can be your personal laptop or desktop, or you can use the [Syslabs Remote Builder](https://cloud.sylabs.io/builder).
 
 ```bash
-sudo singularity build images/base.simg specs/base.singularity
+sudo singularity build base.simg specs/base.singularity
+
+#using the remote builder (create an account first)
+sudo singularity build -r base.simg specs/base.singularity
 ```
 
-Currently, you cannot build the image on `manivald` due to permission concerns.
+Currently, you cannot build the image on `manivald` itself.
 
-# Adding libraries
+# Adding software to the image
+Add the necessary libraries using a pull request by editing the spec file.
 
-Add the necessary libraries using a pull request. Currently, the image is built manually, but we are investigating ways to automate it.
+
+# Using the GPUs on the cluster
+
+We have 10x GPUs located in the cluster, you can use them using the batch system:
+
+```bash
+#run a single command
+srun sbatch --gpus=1 -p gpu nvidia-smi -L
+
+#run an interactive shell
+srun sbatch --gpus=1 -p gpu --pty /bin/bash
+
+#run a batch script
+sbatch --gpus=1 -p gpu script.sh
+```
+
+Where an example batch script can be as follows:
+```bash
+#!/bin/bash
+singularity exec -B /scratch -B /home --nv /home/software/singularity/base.simg:latest python3 my_tensorflow_training.py
+```
