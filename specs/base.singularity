@@ -1,24 +1,24 @@
 Bootstrap: docker
 
-From: nvcr.io/nvidia/cuda:10.2-cudnn7-runtime-ubi8
+From: nvcr.io/nvidia/cuda:10.1-cudnn7-runtime-ubi8
 
 %post
+    export CUDA=cu101
+    export TORCH_CUDA_ARCH_LIST=All
+    export TORCH=1.5.0
+
     yum install -y python38 python38-pip python38-devel
     yum install -y gcc gcc-c++
     yum install -y make cmake3
 
     pip3.8 install tensorflow==2.3
-    pip3.8 install torch==1.5.0
-
-    export TORCH=`python3 -c "import torch; print(torch.__version__)"`
-    export CUDA=cu102
-    export TORCH_CUDA_ARCH_LIST=All
-
+    pip3.8 install torch==${TORCH}+${CUDA} -f https://download.pytorch.org/whl/torch_stable.html
     pip3.8 install torch-scatter==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-${TORCH}.html
     pip3.8 install torch-sparse==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-${TORCH}.html
     pip3.8 install torch-cluster==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-${TORCH}.html
     pip3.8 install torch-spline-conv==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-${TORCH}.html
     pip3.8 install torch-geometric
+    pip3.8 install pytorch-lightning
 
     pip3.8 install setGPU
     pip3.8 install sklearn
