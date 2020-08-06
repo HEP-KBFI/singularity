@@ -25,7 +25,7 @@ This extra step is necessary to allow multiple users to work on the same system,
 
 We have the following software packages available:
 - `/home/software/singularity/base.simg:latest`: defined by [base.singularity](specs/base.singularity)
-  - CUDA 10.2
+  - CUDA 10.1
   - tensorflow 2.3, pytorch 1.5
   - numpy, scipy, sklearn, numba
   - astropy
