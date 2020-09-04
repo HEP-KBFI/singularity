@@ -5,7 +5,7 @@ From: nvcr.io/nvidia/cuda:10.1-cudnn7-runtime-ubuntu18.04
 %post
     export CUDA=cu101
     export TORCH_CUDA_ARCH_LIST=All
-    export TORCH=1.5.0
+    export TORCH=1.6.0
 
     apt update
     apt upgrade -y
@@ -35,9 +35,11 @@ From: nvcr.io/nvidia/cuda:10.1-cudnn7-runtime-ubuntu18.04
     pip3 install tqdm
     pip3 install comet_ml
     pip3 install jupyter notebook
+    
+    pip3 install energyflow
+    pip3 install POT
 
     pip3 install astropy
-    
     pip3 install girder-client
 
 %environment
