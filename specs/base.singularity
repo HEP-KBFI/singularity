@@ -48,6 +48,7 @@ From: nvcr.io/nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 
     pip3 install astropy
     pip3 install girder-client
+    pip3 install pynbody==1.0.2
 
 %environment
 
