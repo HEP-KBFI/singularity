@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: nvcr.io/nvidia/cuda:10.1-cudnn7-runtime-ubuntu18.04
+From: nvcr.io/nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 
 %post
     export CUDA=cu101
@@ -13,6 +13,7 @@ From: nvcr.io/nvidia/cuda:10.1-cudnn7-runtime-ubuntu18.04
     apt install -y gcc g++
     apt install -y make cmake
     apt install -y libhdf5-dev
+    apt install -y parallel
 
     pip3 install -U pip
     pip3 install tensorflow==2.3
