@@ -15,6 +15,8 @@ From: nvcr.io/nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
     apt install -y libhdf5-dev
     apt install -y parallel
     apt install -y language-pack-en
+    apt install -y wget
+    apt install -y libomp-dev
 
     pip3 install -U pip
     pip3 install tensorflow==2.3
@@ -27,6 +29,7 @@ From: nvcr.io/nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
     pip3 install pytorch-lightning
     pip3 install torchvision
     pip3 install tensorboard_plugin_profile
+    pip3 install keras-tuner
 
     pip3 install setGPU
     pip3 install sklearn
