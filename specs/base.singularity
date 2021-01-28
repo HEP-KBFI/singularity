@@ -18,36 +18,43 @@ From: nvcr.io/nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
     apt install -y wget
     apt install -y libomp-dev
 
-    pip3 install -U pip
-    pip3 install tensorflow==2.3
-    pip3 install torch==${TORCH}+${CUDA} -f https://download.pytorch.org/whl/torch_stable.html
-    pip3 install torch-scatter==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-${TORCH}.html
-    pip3 install torch-sparse==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-${TORCH}.html
-    pip3 install torch-cluster==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-${TORCH}.html
-    pip3 install torch-spline-conv==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-${TORCH}.html
-    pip3 install torch-geometric
-    pip3 install pytorch-lightning
-    pip3 install torchvision
-    pip3 install tensorboard_plugin_profile
-    pip3 install keras-tuner
+    python3 -m pip install --upgrade pip
+    python3 -m pip install tensorflow==2.3
+    python3 -m pip install torch==${TORCH}+${CUDA} torchvision==0.7.0+${CUDA} -f https://download.pytorch.org/whl/torch_stable.html
+    python3 -m pip install --no-index torch-scatter -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
+    python3 -m pip install --no-index torch-sparse -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
+    python3 -m pip install --no-index torch-cluster -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
+    python3 -m pip install --no-index torch-spline-conv -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
+    python3 -m pip install torch-geometric
+    python3 -m pip install pytorch-lightning
+    python3 -m pip install torchvision
+    python3 -m pip install tensorboard_plugin_profile
+    python3 -m pip install keras-tuner
+    python3 -m pip install jax jaxlib
+    python3 -m pip install flax
+    python3 -m pip install gin-config
+    python3 -m pip install spektral
 
-    pip3 install setGPU
-    pip3 install sklearn
-    pip3 install matplotlib
-    pip3 install mplhep
-    pip3 install pandas
-    pip3 install scipy
-    pip3 install numba
-    pip3 install uproot
-    pip3 install tqdm
-    pip3 install comet_ml
-    pip3 install jupyter notebook
+    python3 -m pip install setGPU
+    python3 -m pip install sklearn
+    python3 -m pip install matplotlib
+    python3 -m pip install mplhep
+    python3 -m pip install pandas
+    python3 -m pip install scipy
+    python3 -m pip install numba
+    python3 -m pip install uproot3
+    python3 -m pip install uproot3-methods
+    python3 -m pip install awkward0
+    python3 -m pip install tqdm
+    python3 -m pip install comet_ml
+    python3 -m pip install jupyter notebook
+    python3 -m pip install dask distributed parsl
     
-    pip3 install energyflow
-    pip3 install POT
+    python3 -m pip install energyflow
+    python3 -m pip install POT
 
-    pip3 install astropy
-    pip3 install girder-client
+    python3 -m pip install astropy
+    python3 -m pip install girder-client
 
 %environment
 
