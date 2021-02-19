@@ -62,6 +62,13 @@ From: nvcr.io/nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
     #https://github.com/keras-team/keras/issues/14265
     python3 -m pip uninstall -y h5py
     python3 -m pip install 'h5py<3.0.0'
+    
+    python3 -m pip install pynbody
+    python3 -m pip install py-sphviewer
+
+    #https://bitbucket.org/awetzel/gizmo_read/src/master/
+    cd /usr/local
+    git clone https://bitbucket.org/awetzel/gizmo_read.git
 
 %environment
 
