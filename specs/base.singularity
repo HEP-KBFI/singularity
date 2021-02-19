@@ -17,6 +17,7 @@ From: nvcr.io/nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
     apt install -y language-pack-en
     apt install -y wget
     apt install -y libomp-dev
+    apt install -y git
 
     python3 -m pip install --upgrade pip
 
