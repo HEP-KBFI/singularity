@@ -51,9 +51,8 @@ From: nvcr.io/nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
     python3 -m pip install tqdm
     python3 -m pip install comet_ml
     python3 -m pip install jupyter notebook
-    python3 -m pip install dask distributed parsl
+    python3 -m pip install dask distributed parsl bokeh
     python3 -m pip install tables
-    python3 -m pip install netcal
     
     python3 -m pip install energyflow
     python3 -m pip install POT
