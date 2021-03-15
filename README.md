@@ -35,15 +35,7 @@ We have the following software packages available:
 Anyone can build the image on any Linux system on which you have root access. This can be your personal laptop or desktop, or you can use the [Syslabs Remote Builder](https://cloud.sylabs.io/builder) on manivald after creating a Syslabs account.
 
 ```bash
-#as root on your personal linux machine, copy the image to manivald later
-sudo singularity build base.simg specs/base.singularity
-
-#using the remote builder on manivald
-#one-time only: create a syslabs account and authentication token, then run 
-singularity remote login
-
-#now you can build the image
-singularity build -r base.simg specs/base.singularity
+singularity build --fakeroot base.simg specs/base.singularity
 ```
 
 # Adding software to the image
