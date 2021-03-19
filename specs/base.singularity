@@ -21,8 +21,8 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-runtime-ubuntu20.04
 
     python3 -m pip install --upgrade pip
 
-    python3 -m pip install tensorflow==2.4
-    python3 -m pip install tensorflow-probability==0.11.1
+    python3 -m pip install tensorflow==2.4 tensorflow_probability
+    python3 -m pip install tensorflow-addons[tensorflow]
     python3 -m pip install scipy
     python3 -m pip install torch==${TORCH}+${CUDA} torchvision==0.8.1+${CUDA} -f https://download.pytorch.org/whl/torch_stable.html
     python3 -m pip install --no-index torch-scatter -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
