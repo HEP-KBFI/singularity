@@ -37,6 +37,7 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-runtime-ubuntu20.04
     python3 -m pip install flax
     python3 -m pip install gin-config
     python3 -m pip install spektral
+    python3 -m pip install papermill
 
     python3 -m pip install setGPU
     python3 -m pip install sklearn
