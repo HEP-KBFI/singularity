@@ -5,6 +5,7 @@ From: /cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/cc7:amd64
 %post
        yum install -y dnf vim
        yum install -y python3 python3-devel python3-pip
+       yum install -y parallel
        pip3 install gdbgui
 
        #install rr

@@ -37,6 +37,7 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-runtime-ubuntu20.04
     python3 -m pip install flax
     python3 -m pip install gin-config
     python3 -m pip install spektral
+    python3 -m pip install stellargraph
     python3 -m pip install papermill
     python3 -m pip install pytorch-ignite
 
@@ -75,6 +76,8 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-runtime-ubuntu20.04
     #https://bitbucket.org/awetzel/gizmo_read/src/master/
     cd /usr/local
     git clone https://bitbucket.org/awetzel/gizmo_read.git
+    
+    python3 -m pip install plotly
 
 %environment
 
