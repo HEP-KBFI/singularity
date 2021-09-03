@@ -21,10 +21,11 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
 
     python3 -m pip install --upgrade pip
 
-    python3 -m pip install tensorflow==2.4 tensorflow_probability
+    python3 -m pip install numpy==1.19
+    python3 -m pip install tensorflow==2.4
     python3 -m pip install tensorflow-addons[tensorflow]
     python3 -m pip install tensorflow-model-optimization
-    python3 -m pip install onnxruntime tf2onnx
+    python3 -m pip install onnxruntime==1.8.0 tf2onnx==1.8.5
     python3 -m pip install scipy
     python3 -m pip install torch==${TORCH}+${CUDA} torchvision==0.8.1+${CUDA} -f https://download.pytorch.org/whl/torch_stable.html
     python3 -m pip install --no-index torch-scatter -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
@@ -35,6 +36,7 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
     python3 -m pip install pytorch-lightning
     python3 -m pip install tensorboard_plugin_profile
     python3 -m pip install keras-tuner
+    python3 -m pip install 'ray[default]' 'ray[tune]'
     python3 -m pip install jax jaxlib
     python3 -m pip install flax
     python3 -m pip install gin-config
@@ -43,6 +45,7 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
     python3 -m pip install papermill
     python3 -m pip install pytorch-ignite
     python3 -m pip install dgl-cu110
+    python3 -m pip install transformers
 
     python3 -m pip install setGPU
     python3 -m pip install sklearn
