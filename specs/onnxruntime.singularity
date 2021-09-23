@@ -12,6 +12,7 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
 
     python3 -m pip install numpy==1.19
     python3 -m pip install onnxruntime-gpu
+    python3 -m pip install nvidia-ml-py3
 
 %environment
 
