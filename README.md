@@ -26,13 +26,19 @@ This extra step is necessary to allow multiple users to work on the same system,
 We have the following software packages available:
 - `/home/software/singularity/base.simg:latest`: defined by [base.singularity](specs/base.singularity)
   - CUDA 10.1
-  - tensorflow 2.3, pytorch 1.5
+  - tensorflow 2.5, pytorch 1.5
+  - numpy, scipy, sklearn, numba
+  - astropy
+  - jupyter
+- `/home/software/singularity/tf26.simg:latest`: defined by [tf26.singularity](specs/tf26.singularity)
+  - CUDA 10.1
+  - tensorflow 2.6
   - numpy, scipy, sklearn, numba
   - astropy
   - jupyter
 
 # Building the image yourself
-Anyone can build the image on any Linux system on which you have root access. This can be your personal laptop or desktop, or you can use the [Syslabs Remote Builder](https://cloud.sylabs.io/builder) on manivald after creating a Syslabs account.
+Anyone can build the image on any Linux system on which you have root access. This can be your personal laptop or desktop, or you can do on manivald:
 
 ```bash
 singularity build --fakeroot base.simg specs/base.singularity
@@ -40,29 +46,3 @@ singularity build --fakeroot base.simg specs/base.singularity
 
 # Adding software to the image
 Add the necessary libraries using a pull request by editing the [spec file](specs).
-
-# Using the GPUs on the cluster
-We have 10x GPUs available using the batch system:
-
-```bash
-#run a single command, requesting one GPU
-srun --gpus=1 -p gpu nvidia-smi -L
-
-#run an interactive shell
-srun --gpus=1 -p gpu --pty /bin/bash
-
-#run a batch script
-sbatch --gpus=1 -p gpu script.sh
-```
-
-Here is an example batch script where we do a tensorflow training using the singularity image:
-```bash
-#!/bin/bash
-
-#the following environment variable contains the allocated GPUs
-echo $CUDA_VISIBLE_DEVICES
-
-singularity exec -B /scratch -B /home --nv \
-  /home/software/singularity/base.simg:latest \
-  python3 my_tensorflow_training.py
-```
