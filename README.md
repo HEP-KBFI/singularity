@@ -25,13 +25,14 @@ This extra step is necessary to allow multiple users to work on the same system,
 
 We have the following software packages available:
 - `/home/software/singularity/base.simg:latest`: defined by [base.singularity](specs/base.singularity)
-  - CUDA 10.1
-  - tensorflow 2.5, pytorch 1.5
+  - CUDA 11.0
+  - tensorflow 2.4
+  - pytorch 1.7
   - numpy, scipy, sklearn, numba
   - astropy
   - jupyter
 - `/home/software/singularity/tf26.simg:latest`: defined by [tf26.singularity](specs/tf26.singularity)
-  - CUDA 10.1
+  - CUDA 11.2
   - tensorflow 2.6
   - numpy, scipy, sklearn, numba
   - astropy
