@@ -46,6 +46,8 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     python3 -m pip install papermill
     python3 -m pip install dgl-cu110
     python3 -m pip install transformers
+    #https://stackoverflow.com/questions/68970841/another-metric-with-the-same-name-already-exists
+    python3 -m pip install keras==2.6.0
 
     python3 -m pip install setGPU
     python3 -m pip install sklearn
