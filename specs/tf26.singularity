@@ -112,7 +112,7 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
 %environment
     export PATH=/usr/local/root/bin:$PATH
     export LD_LIBRARY_PATH=/usr/local/root/lib:$LD_LIBRARY_PATH
-    export PYTHONPATH=/usr/local/root/lib:$PYTHONPATH
+    export PYTHONPATH=/usr/local:/usr/local/root/lib:$PYTHONPATH
 
 %runscript
     /bin/bash 
