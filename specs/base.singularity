@@ -75,7 +75,7 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
     python3 -m pip install tables
     python3 -m pip install boost-histogram
     python3 -m pip install uproot awkward
-    
+
     #For HEP-KBFI/ml_training
     python3 -m pip install pathlib
     python3 -m pip install pluggy
@@ -87,7 +87,6 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
     python3 -m pip install scikit-learn
     python3 -m pip install numpy
     python3 -m pip install docopt
-    python3 -m pip install tensorflow
     python3 -m pip install pandas
     python3 -m pip install matplotlib
     python3 -m pip install xgboost
