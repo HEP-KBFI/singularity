@@ -27,18 +27,18 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
 
     python3 -m pip install --upgrade pip
 
-    python3 -m pip install numpy==1.19
-    python3 -m pip install tensorflow==2.6
-    python3 -m pip install tensorflow-addons==0.14.0
-    python3 -m pip install tensorflow-model-optimization==0.7.7
-    python3 -m pip install tensorflow-datasets==4.4.0
-    python3 -m pip install tensorflow-estimator==2.6.0
-    python3 -m pip install onnxruntime==1.9.0 tf2onnx==1.9.2
-    python3 -m pip install tf-models-official==2.6.0
-    python3 -m pip install tensorflow-text==2.6.0
+    python3 -m pip install numpy
+    python3 -m pip install tensorflow
+    python3 -m pip install tensorflow-addons
+    python3 -m pip install tensorflow-model-optimization
+    python3 -m pip install tensorflow-datasets
+    python3 -m pip install tensorflow-estimator
+    python3 -m pip install onnxruntime tf2onnx
+    python3 -m pip install tf-models-official
+    python3 -m pip install tensorflow-text
     python3 -m pip install scipy
-    python3 -m pip install tensorboard_plugin_profile==2.5.0
-    python3 -m pip install keras-tuner==1.1.0
+    python3 -m pip install tensorboard_plugin_profile
+    python3 -m pip install keras-tuner
     python3 -m pip install 'ray[default]' 'ray[tune]'
     python3 -m pip install jax jaxlib
     python3 -m pip install flax
@@ -48,8 +48,6 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     python3 -m pip install papermill
     python3 -m pip install dgl-cu110
     python3 -m pip install transformers
-    #https://stackoverflow.com/questions/68970841/another-metric-with-the-same-name-already-exists
-    python3 -m pip install keras==2.6.0
     python3 -m pip install nevergrad
 
     python3 -m pip install seaborn
@@ -69,6 +67,7 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     python3 -m pip install tables
     python3 -m pip install boost-histogram
     python3 -m pip install uproot awkward
+    python3 -m pip install pydot pygraphviz
 
     #For HEP-KBFI/ml_training
     python3 -m pip install pluggy
@@ -92,10 +91,6 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     python3 -m pip install girder-client
     
     python3 -m pip install https://github.com/LAL/trackml-library/archive/master.zip
-    
-    #https://github.com/keras-team/keras/issues/14265
-    python3 -m pip uninstall -y h5py
-    python3 -m pip install 'h5py<3.0.0'
     
     python3 -m pip install pynbody
     python3 -m pip install py-sphviewer

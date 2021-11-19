@@ -77,7 +77,6 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
     python3 -m pip install uproot awkward
 
     #For HEP-KBFI/ml_training
-    python3 -m pip install pathlib
     python3 -m pip install pluggy
     python3 -m pip install attrs
     python3 -m pip install py
