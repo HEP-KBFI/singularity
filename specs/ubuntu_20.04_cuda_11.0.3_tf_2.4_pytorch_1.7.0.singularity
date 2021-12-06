@@ -89,6 +89,8 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
     python3 -m pip install pandas
     python3 -m pip install matplotlib
     python3 -m pip install xgboost
+    python3 -m pip install Pillow
+    python3 -m pip install tensorboardX
 
     python3 -m pip install energyflow
     python3 -m pip install POT
