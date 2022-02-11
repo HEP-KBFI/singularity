@@ -58,6 +58,7 @@ From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
     python3 -m pip install papermill
     python3 -m pip install dgl-cu110
     python3 -m pip install transformers
+    python3 -m pip install pyarrow
 
     python3 -m pip install setGPU
     python3 -m pip install sklearn
