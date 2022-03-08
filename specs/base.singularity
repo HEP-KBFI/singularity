@@ -59,9 +59,6 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     python3 -m pip install mplhep
     python3 -m pip install pandas
     python3 -m pip install numba
-    python3 -m pip install uproot3
-    python3 -m pip install uproot3-methods
-    python3 -m pip install awkward0
     python3 -m pip install tqdm
     python3 -m pip install comet_ml
     python3 -m pip install jupyter notebook
@@ -71,20 +68,7 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     python3 -m pip install uproot awkward
     python3 -m pip install pydot pygraphviz
     python3 -m pip install plotly
-
-    #For HEP-KBFI/ml_training
-    python3 -m pip install pluggy
-    python3 -m pip install attrs
-    python3 -m pip install py
-    python3 -m pip install uproot-methods
-    python3 -m pip install eli5
-    python3 -m pip install cmsml
-    python3 -m pip install scikit-learn
-    python3 -m pip install numpy
-    python3 -m pip install docopt
-    python3 -m pip install pandas
-    python3 -m pip install matplotlib
-    python3 -m pip install xgboost
+    python3 -m pip install keras-flops
 
     python3 -m pip install energyflow
     python3 -m pip install POT
