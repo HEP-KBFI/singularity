@@ -17,6 +17,9 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     apt install -y graphviz
     apt install -y libblas3 libblas-dev liblapack3 liblapack-dev libatlas3-base libatlas-base-dev
 
+    apt install -y openmpi-bin libhdf5-dev libhdf5-103 libopenmpi-dev
+
+
     #https://root.cern/install/dependencies/
     apt install -y dpkg-dev cmake g++ gcc binutils libx11-dev libxpm-dev \
         libxft-dev libxext-dev python libssl-dev
