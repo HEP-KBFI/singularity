@@ -11,12 +11,13 @@ From: tensorflow/tensorflow:2.8.0-gpu-jupyter
     python3 -m pip install tensorflow-model-optimization
     python3 -m pip install tensorflow-datasets
     python3 -m pip install tensorflow-estimator
-    python3 -m pip install tf2onnx
+    python3 -m pip install onnxruntime tf2onnx
     python3 -m pip install tf-models-official
     python3 -m pip install tensorflow-text
     python3 -m pip install scipy
     python3 -m pip install tensorboard_plugin_profile
     python3 -m pip install keras-tuner
+    python3 -m pip install 'ray[default]' 'ray[tune]'
     python3 -m pip install jax jaxlib
     python3 -m pip install flax
     python3 -m pip install gin-config
