@@ -27,6 +27,8 @@ From: tensorflow/tensorflow:2.7.1-gpu-jupyter
     python3 -m pip install transformers
     python3 -m pip install nevergrad
     python3 -m pip install pyarrow
+    python3 -m pip install line_profiler
+    python3 -m pip install memory_profiler
 
     python3 -m pip install seaborn
     python3 -m pip install setGPU
