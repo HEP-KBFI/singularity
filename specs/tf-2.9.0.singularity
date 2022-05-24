@@ -1,9 +1,8 @@
 Bootstrap: docker
 
-From: tensorflow/tensorflow:2.8.0-gpu-jupyter
+From: tensorflow/tensorflow:2.9.0-gpu-jupyter
 
 %post
-    apt update -y
     apt install -y git graphviz graphviz-dev wget make cmake parallel gcc g++ gfortran binutils
 
     python3 -m pip install tensorflow-addons
@@ -27,6 +26,7 @@ From: tensorflow/tensorflow:2.8.0-gpu-jupyter
     python3 -m pip install line_profiler
     python3 -m pip install memory_profiler
 
+    python3 -m pip install networkx
     python3 -m pip install seaborn
     python3 -m pip install setGPU
     python3 -m pip install sklearn
@@ -44,6 +44,7 @@ From: tensorflow/tensorflow:2.8.0-gpu-jupyter
     python3 -m pip install pydot pygraphviz
     python3 -m pip install plotly
     python3 -m pip install keras-flops
+    python3 -m pip install hdbscan
 
     python3 -m pip install energyflow
     python3 -m pip install POT
