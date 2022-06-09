@@ -41,3 +41,4 @@ zenodo_get
 pymultinest
 particle
 vector
+fastjet

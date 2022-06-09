@@ -6,7 +6,7 @@ From: pytorch/pytorch:1.11.0-cuda11.3-cudnn8-devel
     specs/python_base.txt /opt/python_base.txt
 
 %post
-    apt -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true update
+    apt -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true update --fix-missing
     apt install -y graphviz graphviz-dev
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt

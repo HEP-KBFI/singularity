@@ -7,6 +7,7 @@ From: tensorflow/tensorflow:2.9.0-gpu-jupyter
     specs/python_tf.txt /opt/python_tf.txt
 
 %post
+    apt update -y --fix-missing
     apt install -y git graphviz graphviz-dev wget make cmake parallel gcc g++ gfortran binutils
     apt install -y libblas3 libblas-dev liblapack3 liblapack-dev libatlas3-base libatlas-base-dev
     
