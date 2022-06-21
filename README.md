@@ -23,8 +23,14 @@ such that your program runs within the environment defined in `/home/software/si
 
 # Building the image yourself
 
+For local usage (manivald, gpu0):
 ```bash
 singularity build --fakeroot base.simg specs/base.singularity
+```
+
+For batch usage where the jobs run in a container, the sandbox mode must be used
+```bash
+singularity build --fakeroot --sandbox /home/software/singularity/base-2022-XX-XX specs/base.singularity
 ```
 
 # Adding software to the image
