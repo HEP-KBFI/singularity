@@ -16,3 +16,4 @@ flax
 gin-config
 transformers
 keras-flops
+comet-ml
