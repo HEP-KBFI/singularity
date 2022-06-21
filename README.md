@@ -1,6 +1,7 @@
 # Custom libraries on the KBFI cluster
 
 We use a software layer [singularity](https://sylabs.io/singularity/) that allows every user to create an isolated environment or "singularity image" for themselves in which they can install anything they wish. It's widely used by the LHC grid and by multiple HPC sites.
+This allows to install any system libraries or binary packages, including complicated stuff like CUDA, for multiple mutually incompatible setups at the same time (in different images).
 
 Basically, this means that instead of executing directly
 
@@ -23,8 +24,14 @@ such that your program runs within the environment defined in `/home/software/si
 
 # Building the image yourself
 
+For local usage (manivald, gpu0):
 ```bash
 singularity build --fakeroot base.simg specs/base.singularity
+```
+
+For batch usage where the jobs run in a container, the sandbox mode must be used
+```bash
+singularity build --fakeroot --sandbox /home/software/singularity/base-2022-XX-XX specs/base.singularity
 ```
 
 # Adding software to the image
