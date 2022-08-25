@@ -42,3 +42,7 @@ pymultinest
 particle
 vector
 fastjet
+pre-commit
+black
+flake8
+isort
