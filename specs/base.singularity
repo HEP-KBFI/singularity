@@ -25,7 +25,10 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     apt install -y opencl-clhpp-headers opencl-c-headers ocl-icd-opencl-dev
     apt install -y nvidia-opencl-dev
     apt install -y pocl-opencl-icd
+    apt install -y oclgrind
     apt install -y pkg-config
+    apt install -y cuda-samples-11-2
+    apt install -y mpich
 
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
