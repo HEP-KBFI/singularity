@@ -29,6 +29,8 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     apt install -y pkg-config
     apt install -y cuda-samples-11-2
     apt install -y mpich
+    apt install -y libgsl23 libgsl-dev
+    apt install -y libfftw3-3 libfftw3-bin libfftw3-dev libfftw3-mpi3 libfftw3-mpi-dev
 
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
