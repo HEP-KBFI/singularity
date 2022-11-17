@@ -1,0 +1,14 @@
+Bootstrap: docker
+
+From: texlive/texlive:latest
+
+%post
+    tlmgr install acronym
+    tlmgr install bigfoot
+    tlmgr install xstring
+    tlmgr install soul
+
+
+%environment
+
+%runscript

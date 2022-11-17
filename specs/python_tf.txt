@@ -15,5 +15,6 @@ jaxlib
 flax
 gin-config
 transformers
+datasets
 keras-flops
 comet-ml

@@ -1,0 +1,21 @@
+Bootstrap: docker
+
+From: tensorflow/tensorflow:2.10.0-gpu-jupyter
+
+%files
+    specs/python_base.txt /opt/python_base.txt
+    specs/python_tf.txt /opt/python_tf.txt
+
+%post
+    apt update -y --fix-missing
+    apt install -y git graphviz graphviz-dev wget make cmake parallel gcc g++ gfortran binutils
+    apt install -y libblas3 libblas-dev liblapack3 liblapack-dev libatlas3-base libatlas-base-dev
+    
+    python3 -m pip install --upgrade pip
+    python3 -m pip install -r /opt/python_base.txt
+    python3 -m pip install -r /opt/python_tf.txt
+
+%environment
+
+%runscript
+    /bin/bash 
