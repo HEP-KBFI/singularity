@@ -1,19 +1,22 @@
 Bootstrap: docker
 
-From: rocm/tensorflow:latest
+From: rocm/rocm-terminal:5.3.2
 
 %files
     specs/python_base.txt /opt/python_base.txt
-    specs/python_tf.txt /opt/python_tf.txt
+    specs/python_tf_rocm.txt /opt/python_tf_rocm.txt
 
 %post
-    # apt update -y --fix-missing
-    # apt install -y git graphviz graphviz-dev wget make cmake parallel gcc g++ gfortran binutils
-    # apt install -y libblas3 libblas-dev liblapack3 liblapack-dev libatlas3-base libatlas-base-dev
-    
-    python3 -m pip install --upgrade pip
+    apt update -y --fix-missing
+    apt install -y git graphviz graphviz-dev wget make cmake parallel gcc g++ gfortran binutils
+    apt install -y libblas3 libblas-dev liblapack3 liblapack-dev libatlas3-base libatlas-base-dev
+    apt install -y python3 python3-dev
+    apt install -y rocm-libs rccl
+
     python3 -m pip install -r /opt/python_base.txt
-    python3 -m pip install -r /opt/python_tf.txt
+    python3 -m pip install -r /opt/python_tf_rocm.txt
+    python3 -m pip uninstall -y tensorflow
+    python3 -m pip install --no-input tensorflow-rocm
 
 %environment
 

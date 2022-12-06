@@ -22,6 +22,15 @@ or
 
 such that your program runs within the environment defined in `/home/software/singularity/base.simg`.
 
+# Prebuilt images
+
+I maintain a number of images for libraries like TF, pytorch here: 
+```
+ls /home/software/singularity/
+```
+
+You can also find images on dockerhub, in /cvmfs, or from the internet (do not run untrusted images).
+
 # Building the image yourself
 
 For local usage (manivald, gpu0):
