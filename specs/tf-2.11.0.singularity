@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: tensorflow/tensorflow:2.10.0-gpu-jupyter
+From: tensorflow/tensorflow:2.11.0-gpu-jupyter
 
 %files
     specs/python_base.txt /opt/python_base.txt
