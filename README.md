@@ -33,14 +33,9 @@ You can also find images on dockerhub, in /cvmfs, or from the internet (do not r
 
 # Building the image yourself
 
-For local usage (manivald, gpu0):
+For local usage (manivald, gpu0), do this **once** on manivald:
 ```bash
 singularity build --fakeroot base.simg specs/base.singularity
-```
-
-For batch usage where the jobs run in a container, the sandbox mode must be used
-```bash
-singularity build --fakeroot --sandbox /home/software/singularity/base-2022-XX-XX specs/base.singularity
 ```
 
 # Adding software to the image
