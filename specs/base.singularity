@@ -13,8 +13,8 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     apt install -y clang clang-format clang-tidy
     apt install -y valgrind
     apt install -y make cmake
-    apt install -y autoconf libtool automake swig
-    apt install -y libhdf5-dev
+    apt install -y autoconf libtool libtool-bin automake swig
+    apt install -y libhdf5-dev libhdf5-serial-dev
     apt install -y parallel
     apt install -y language-pack-en
     apt install -y wget
@@ -31,6 +31,8 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     apt install -y mpich
     apt install -y libgsl23 libgsl-dev
     apt install -y libfftw3-3 libfftw3-bin libfftw3-dev libfftw3-mpi3 libfftw3-mpi-dev
+    apt install -y texlive-latex-extra cm-super
+    apt install -y dvipng
 
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
