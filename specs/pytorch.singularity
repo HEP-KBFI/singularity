@@ -12,7 +12,8 @@ From: pytorch/pytorch:1.12.1-cuda11.3-cudnn8-devel
     python3 -m pip install -r /opt/python_base.txt
     python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.12.1+cu113.html
     python3 -m pip install transformers datasets
-
+    python3 -m pip install onnx onnxruntime
+ 
 %environment
 
 %runscript
