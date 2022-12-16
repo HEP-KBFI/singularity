@@ -6,7 +6,7 @@ line_profiler
 memory_profiler
 networkx
 seaborn
-sklearn
+scikit-learn
 matplotlib
 mplhep
 pandas
