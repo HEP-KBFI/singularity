@@ -22,16 +22,20 @@ or
 
 such that your program runs within the environment defined in `/home/software/singularity/base.simg`.
 
-# Building the image yourself
+# Prebuilt images
 
-For local usage (manivald, gpu0):
-```bash
-singularity build --fakeroot base.simg specs/base.singularity
+I maintain a number of images for libraries like TF, pytorch here: 
+```
+ls /home/software/singularity/
 ```
 
-For batch usage where the jobs run in a container, the sandbox mode must be used
+You can also find images on dockerhub, in /cvmfs, or from the internet (do not run untrusted images).
+
+# Building the image yourself
+
+For local usage (manivald, gpu0), do this **once** on manivald:
 ```bash
-singularity build --fakeroot --sandbox /home/software/singularity/base-2022-XX-XX specs/base.singularity
+singularity build --fakeroot base.simg specs/base.singularity
 ```
 
 # Adding software to the image
