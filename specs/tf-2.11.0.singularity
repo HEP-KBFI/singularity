@@ -10,6 +10,7 @@ From: tensorflow/tensorflow:2.11.0-gpu-jupyter
     apt update -y --fix-missing
     apt install -y git graphviz graphviz-dev wget make cmake parallel gcc g++ gfortran binutils
     apt install -y libblas3 libblas-dev liblapack3 liblapack-dev libatlas3-base libatlas-base-dev
+    apt install -y libtcmalloc-minimal4
     
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
