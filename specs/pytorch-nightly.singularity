@@ -1,0 +1,24 @@
+Bootstrap: docker
+
+From: pytorch/pytorch:1.13.0-cuda11.6-cudnn8-devel
+
+%files
+    specs/python_base.txt /opt/python_base.txt
+
+%post
+    apt -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true update --fix-missing
+    apt install -y graphviz graphviz-dev
+    apt install -y cuda-libraries-dev-11-6
+    python3 -m pip install --upgrade pip
+    python3 -m pip install --default-timeout=1000 -r /opt/python_base.txt
+    # python3 -m pip install --default-timeout=1000 torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.13.0+cu116.html
+    python3 -m pip uninstall -y torch torchvision torchaudio
+    python3 -m pip install --default-timeout=1000 --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cu116
+    python3 -m pip install --default-timeout=1000 transformers datasets
+    python3 -m pip install --default-timeout=1000 onnx onnxruntime
+ 
+%environment
+
+%runscript
+    /bin/bash 
+

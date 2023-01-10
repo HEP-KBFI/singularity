@@ -5,7 +5,7 @@ black
 bokeh
 boost-histogram
 corner
-cupy
+cupy-cuda11x
 dask
 distributed
 emcee
