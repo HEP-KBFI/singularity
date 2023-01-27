@@ -27,6 +27,7 @@ isort
 jupyter
 line_profiler
 lmfit
+lz4
 matplotlib
 memory_profiler
 mpl_scatter_density
