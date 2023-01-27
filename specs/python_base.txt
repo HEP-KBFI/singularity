@@ -8,6 +8,7 @@ corner
 cupy-cuda11x
 dask
 distributed
+docopt
 emcee
 energyflow
 fastjet
@@ -16,8 +17,10 @@ flake8
 girder-client
 hdbscan
 healpy
+hydra-core
 imageio
 imageio-ffmpeg
+ipyparallel
 isort
 jupyter
 line_profiler
