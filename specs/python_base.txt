@@ -1,6 +1,8 @@
 POT
+PyYAML
 astropy
 awkward
+awkward0
 black
 bokeh
 boost-histogram
@@ -49,7 +51,9 @@ scikit-learn
 scipy
 seaborn
 tables
+tensorboard
 tqdm
 uproot
 vector
+xxhash
 zenodo_get
