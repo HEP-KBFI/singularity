@@ -33,6 +33,19 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     apt install -y libfftw3-3 libfftw3-bin libfftw3-dev libfftw3-mpi3 libfftw3-mpi-dev
     apt install -y texlive-latex-extra cm-super
     apt install -y dvipng
+    apt install -y libx11-dev libxmu-dev
+    apt install -y mesa-utils libglu1-mesa-dev freeglut3-dev mesa-common-dev
+    apt install -y libglew-dev libglfw3-dev libglm-dev
+
+    #https://root.cern/install/dependencies/
+    apt install -y dpkg-dev cmake g++ gcc binutils libx11-dev libxpm-dev \
+        libxft-dev libxext-dev python libssl-dev
+    apt install -y gfortran libpcre3-dev \
+        xlibmesa-glu-dev libglew1.5-dev libftgl-dev \
+        libmysqlclient-dev libfftw3-dev libcfitsio-dev \
+        graphviz-dev libavahi-compat-libdnssd-dev \
+        libldap2-dev python-dev libxml2-dev libkrb5-dev \
+        libgsl0-dev
 
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
@@ -44,8 +57,15 @@ From: nvcr.io/nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
     cmake ..
     make
 
+    #https://root.cern/install/#download-a-pre-compiled-binary-distribution
+    cd /usr/local
+    wget https://root.cern/download/root_v6.28.00.Linux-ubuntu20-x86_64-gcc9.4.tar.gz
+    tar xf root_v6.28.00.Linux-ubuntu20-x86_64-gcc9.4.tar.gz
 
 %environment
+    export PATH=/usr/local/root/bin:$PATH
+    export LD_LIBRARY_PATH=/usr/local/root/lib:/usr/local/MultiNest/lib:$LD_LIBRARY_PATH
+    export PYTHONPATH=/usr/local/:/usr/local/root/lib:$PYTHONPATH
 
 %runscript
     /bin/bash 
