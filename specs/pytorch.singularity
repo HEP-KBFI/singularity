@@ -9,6 +9,7 @@ From: pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
     apt -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true update --fix-missing
     apt install -y graphviz graphviz-dev
     apt install -y git
+    apt install -y wget
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
     python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.13.1+cu116.html
