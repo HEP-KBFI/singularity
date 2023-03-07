@@ -1,6 +1,6 @@
-Bootstrap: localimage
+Bootstrap: docker
 
-From: /cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/cc7:amd64
+From: cern/cc7-base
 
 %post
        yum install -y dnf vim
@@ -8,12 +8,9 @@ From: /cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/cc7:amd64
        yum install -y parallel
        yum install -y doxygen
        yum install -y motif motif-devel
+       yum install -y wget
+       yum install -y gcc gcc-c++ make patch bash tar gzip unzip bzip2 xz file gnupg2 git
        pip3 install gdbgui
-
-       #install rr
-       wget https://github.com/rr-debugger/rr/releases/download/5.5.0/rr-5.5.0-Linux-x86_64.rpm
-       dnf install -y rr-5.5.0-Linux-x86_64.rpm
-       echo 0 > /proc/sys/kernel/perf_event_paranoid
 
 %environment
 
