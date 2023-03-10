@@ -10,14 +10,10 @@ From: pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
     apt install -y graphviz graphviz-dev
     apt install -y git
     apt install -y wget
-    apt install -y libboost-dev libmpfr-dev libgmp-dev swig autoconf libtool automake libtool-bin
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
     python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.13.1+cu116.html
     python3 -m pip install transformers datasets
-    git clone --recursive https://github.com/scikit-hep/fastjet.git && cd fastjet
-    git checkout 752499dfcf221c3dd305bdf5898fe3c32e3043e2
-    python3 -m pip install .
     python3 -m pip install onnx onnxruntime
     pip3 install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cu116
  
