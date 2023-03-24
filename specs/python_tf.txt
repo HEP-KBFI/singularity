@@ -4,6 +4,7 @@ tensorflow-datasets
 tensorflow-estimator
 tensorflow-text
 tf-models-official
+onnx
 onnxruntime
 tf2onnx
 tensorboard_plugin_profile
