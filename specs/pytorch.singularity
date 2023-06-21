@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
+From: nvcr.io/nvidia/pytorch:23.05-py3
 
 %files
     specs/python_base.txt /opt/python_base.txt
@@ -10,12 +10,17 @@ From: pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
     apt install -y graphviz graphviz-dev
     apt install -y git
     apt install -y wget
+    apt install -y nvidia-cuda-dev
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
-    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric==2.2.0 -f https://data.pyg.org/whl/torch-1.13.1+cu116.html
+    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.0.0+cu117.html
     python3 -m pip install transformers datasets
     python3 -m pip install onnx onnxruntime
-    python3 -m pip install --pre torch==1.13.1 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cu116
+    python3 -m pip install scikit-image
+    python3 -m pip install absl-py
+    python3 -m pip install sporco
+    python3 -m pip install Ninja
+    python3 -m pip install ml-collections
     python3 -m pip install hls4ml[profiling]
  
 %environment
