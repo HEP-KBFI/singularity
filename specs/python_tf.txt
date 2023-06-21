@@ -3,11 +3,11 @@ tensorflow-model-optimization
 tensorflow-datasets
 tensorflow-estimator
 tensorflow-text
+tensorboard_plugin_profile
 tf-models-official
 onnx
 onnxruntime
 tf2onnx
-tensorboard_plugin_profile
 keras-tuner
 ray[default]
 ray[tune]

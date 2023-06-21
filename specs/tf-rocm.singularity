@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: rocm/rocm-terminal:5.4
+From: rocm/rocm-terminal:5.5.1
 
 %files
     specs/python_base.txt /opt/python_base.txt
