@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: tensorflow/tensorflow:2.11.0-gpu-jupyter
+From: tensorflow/tensorflow:2.13.0-gpu-jupyter
 
 %files
     specs/python_base.txt /opt/python_base.txt
@@ -23,6 +23,7 @@ From: tensorflow/tensorflow:2.11.0-gpu-jupyter
 %environment
     export PIP_DEFAULT_TIMEOUT=500
     export LC_ALL=""
+    export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
 
 %runscript
     /bin/bash 
