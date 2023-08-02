@@ -26,6 +26,11 @@ From: pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
     python3 -m pip install Ninja
     python3 -m pip install ml-collections
     python3 -m pip install keras-core
+    python3 -m pip install keras-cv
+    python3 -m pip install tensorflow
+    python3 -m pip install tensorflow tensorflow-datasets
+    python3 -m pip install packaging ninja
+    MAX_JOBS=4 python3 -m pip install flash-attn --no-build-isolation
     python3 -m pip install hls4ml[profiling]
  
 %environment
