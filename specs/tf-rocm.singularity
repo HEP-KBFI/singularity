@@ -16,7 +16,7 @@ From: rocm/rocm-terminal:5.5.1
     python3 -m pip install -r /opt/python_base.txt
     python3 -m pip install -r /opt/python_tf_rocm.txt
     python3 -m pip uninstall -y tensorflow
-    python3 -m pip install --no-input tensorflow-rocm==2.11.1.550
+    python3 -m pip install --no-input tensorflow-rocm==2.13.0.570
 
 %environment
 
