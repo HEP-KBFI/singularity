@@ -34,6 +34,7 @@ From: pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
     python3 -m pip install hls4ml[profiling]
     python3 -m pip install open3d-cpu
     python3 -m pip install ray[default] ray[train] ray[tune]
+    python3 -m pip install comet_ml
  
 %environment
     export PIP_DEFAULT_TIMEOUT=500
