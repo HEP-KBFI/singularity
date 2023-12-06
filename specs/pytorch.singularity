@@ -36,6 +36,7 @@ From: pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
     python3 -m pip install ray[default] ray[train] ray[tune]
     python3 -m pip install causal-conv1d
     python3 -m pip install mamba-ssm
+    python3 -m pip install comet_ml
  
 %environment
     export PIP_DEFAULT_TIMEOUT=500
