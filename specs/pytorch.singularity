@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
+From: pytorch/pytorch:2.2.0-cuda12.1-cudnn8-devel
 
 %files
     specs/python_base.txt /opt/python_base.txt
@@ -17,9 +17,9 @@ From: pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
 
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
-    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.0.1+cu117.html
+    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.2.0+cu121.html
     python3 -m pip install transformers datasets
-    python3 -m pip install onnx onnxruntime
+    python3 -m pip install onnx onnxruntime onnxscript
     python3 -m pip install scikit-image
     python3 -m pip install absl-py
     python3 -m pip install sporco
@@ -27,10 +27,11 @@ From: pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
     python3 -m pip install ml-collections
     python3 -m pip install keras-core
     python3 -m pip install keras-cv
-    python3 -m pip install tensorflow
-    python3 -m pip install tensorflow tensorflow-datasets
+    # python3 -m pip install tensorflow
+    python3 -m pip install tensorflow-datasets
     python3 -m pip install packaging ninja
     MAX_JOBS=4 python3 -m pip install flash-attn --no-build-isolation
+    python3 -m pip install triton
     python3 -m pip install hls4ml[profiling]
     python3 -m pip install open3d-cpu
     python3 -m pip install ray[default] ray[train] ray[tune]
