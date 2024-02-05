@@ -1,0 +1,15 @@
+Bootstrap: docker
+
+From: cmssw/cc7
+
+%post
+    wget https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-10.0.130-1.x86_64.rpm
+    rpm -i cuda-repo-*.rpm
+    yum install -y cuda-10.0.130-1
+    wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.0_20191031/RHEL7_3-x64/libcudnn7-7.6.5.32-1.cuda10.0.x86_64.rpm
+    rpm -i libcudnn*.rpm
+
+%environment
+
+%runscript
+    /bin/bash 

@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: rocm/rocm-terminal:6.0
+From: rocm/rocm-terminal:5.6.1
 
 %files
     specs/python_base.txt /opt/python_base.txt
@@ -17,7 +17,7 @@ From: rocm/rocm-terminal:6.0
     python3.9 -m pip install -r /opt/python_base.txt
     python3.9 -m pip install -r /opt/python_tf_rocm.txt
     python3.9 -m pip uninstall -y tensorflow
-    python3.9 -m pip install --no-input tensorflow-rocm==2.14.0.600
+    python3.9 -m pip install --no-input keras-tuner tensorflow-rocm==2.12.0.560
 
 %environment
 
