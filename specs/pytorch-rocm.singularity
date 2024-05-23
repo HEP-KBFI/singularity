@@ -1,7 +1,8 @@
 Bootstrap: docker
 
-#From: rocm/rocm-terminal:5.7.1
-From: rocm/pytorch:rocm6.0.2_ubuntu22.04_py3.10_pytorch_2.1.2
+From: rocm/rocm-terminal:6.0.2
+#From: rocm/pytorch:rocm6.0.2_ubuntu22.04_py3.10_pytorch_2.1.2
+#From: rocm/pytorch:rocm5.7_ubuntu22.04_py3.10_pytorch_2.0.1
 #From: rocm/pytorch:rocm6.0_FA_carlus_0207
 
 %files
@@ -16,11 +17,12 @@ From: rocm/pytorch:rocm6.0.2_ubuntu22.04_py3.10_pytorch_2.1.2
     DEBIAN_FRONTEND=noninteractive apt install -y python3-dev
 
     python3 -m pip install --upgrade pip
-    export GPU_ARCHS="gfx90a"
-    git clone --recursive https://github.com/ROCmSoftwarePlatform/flash-attention.git
-    cd flash-attention && python3 -m pip install .
+    #export GPU_ARCHS="gfx90a"
+    #export MAX_JOBS=1
+    #git clone --recursive https://github.com/ROCmSoftwarePlatform/flash-attention.git
+    #cd flash-attention && python3 -m pip install .
     python3 -m pip install -r /opt/python_base.txt
-    # python3 -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm5.7
+    python3 -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.0
     python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric
     python3 -m pip install transformers datasets
     python3 -m pip install onnx onnxruntime
@@ -31,8 +33,7 @@ From: rocm/pytorch:rocm6.0.2_ubuntu22.04_py3.10_pytorch_2.1.2
     python3 -m pip install ml-collections
     python3 -m pip install keras-core
     python3 -m pip install keras-cv
-    python3 -m pip install tensorflow
-    python3 -m pip install tensorflow tensorflow-datasets
+    python3 -m pip install tensorflow-datasets
     python3 -m pip install packaging ninja
     python3 -m pip install ray[default] ray[train] ray[tune]
     python3 -m pip install comet_ml
