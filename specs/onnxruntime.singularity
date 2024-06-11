@@ -1,10 +1,9 @@
 Bootstrap: docker
 
-From: tensorflow/tensorflow:2.14.0-gpu-jupyter
+From: pytorch/pytorch:2.3.0-cuda11.8-cudnn8-devel
 
 %files
     specs/python_base.txt /opt/python_base.txt
-    specs/python_tf.txt /opt/python_tf.txt
 
 %post
     apt update -y --fix-missing
@@ -15,21 +14,40 @@ From: tensorflow/tensorflow:2.14.0-gpu-jupyter
     apt install -y graphviz graphviz-dev
     apt install -y git
     apt install -y wget
-    apt install -y python3.10-dev
-    curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
-    
-    python3.10 -m pip install --upgrade pip
-    python3.10 -m pip install -r /opt/python_base.txt
-    python3.10 -m pip install -r /opt/python_tf.txt
-    python3.10 -m pip install hls4ml[profiling]
-    HOROVOD_WITH_TENSORFLOW=1 python3.10 -m pip install horovod[tensorflow,keras]
-    python3.10 -m pip install onnxruntime-gpu
-    python3.10 -m pip install nvidia-ml-py3
+    apt install -y libgl1-mesa-glx
+    apt install -y texlive
 
+    python3 -m pip install --upgrade pip
+    python3 -m pip install -r /opt/python_base.txt
+    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.3.0+cu118.html
+    python3 -m pip install transformers datasets
+    python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
+    python3 -m pip install --prefix /opt/onnxruntime-gpu onnxruntime-gpu
+    python3 -m pip install --prefix /opt/onnxruntime-openvino onnxruntime-openvino
+    python3 -m pip install torch_runstats
+    python3 -m pip install scikit-image
+    python3 -m pip install absl-py
+    python3 -m pip install sporco
+    python3 -m pip install Ninja
+    python3 -m pip install ml-collections
+    python3 -m pip install keras-core
+    python3 -m pip install keras-cv
+    python3 -m pip install tensorflow
+    python3 -m pip install tensorflow-datasets
+    python3 -m pip install packaging ninja
+    python3 -m pip install triton
+    python3 -m pip install hls4ml[profiling]
+    python3 -m pip install open3d-cpu
+    python3 -m pip install ray[default] ray[train] ray[tune] ray[cluster]
+    python3 -m pip install comet_ml
+    python3 -m pip install pynvml
+    python3 -m pip install wandb
+    python3 -m pip install lightning
+    python3 -m pip install nvidia-ml-py3
+ 
 %environment
     export PIP_DEFAULT_TIMEOUT=500
     export LC_ALL=""
-    export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
 
 %runscript
-    /bin/bash 
+    /bin/bash

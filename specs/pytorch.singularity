@@ -21,7 +21,7 @@ From: pytorch/pytorch:2.3.0-cuda12.1-cudnn8-devel
     python3 -m pip install -r /opt/python_base.txt
     python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
     python3 -m pip install transformers datasets
-    python3 -m pip install onnx onnxruntime onnxscript
+    python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
     python3 -m pip install torch_runstats
     python3 -m pip install scikit-image
     python3 -m pip install absl-py
@@ -41,6 +41,7 @@ From: pytorch/pytorch:2.3.0-cuda12.1-cudnn8-devel
     python3 -m pip install pynvml
     python3 -m pip install wandb
     python3 -m pip install lightning
+    python3 -m pip install nvidia-ml-py3
  
 %environment
     export PIP_DEFAULT_TIMEOUT=500
