@@ -26,7 +26,6 @@ From: pytorch/pytorch:2.3.0-cuda12.1-cudnn8-devel
     python3 -m pip install scikit-image
     python3 -m pip install absl-py
     python3 -m pip install sporco
-    python3 -m pip install Ninja
     python3 -m pip install ml-collections
     python3 -m pip install keras-core
     python3 -m pip install keras-cv
@@ -42,6 +41,8 @@ From: pytorch/pytorch:2.3.0-cuda12.1-cudnn8-devel
     python3 -m pip install wandb
     python3 -m pip install lightning
     python3 -m pip install nvidia-ml-py3
+    python3 -m pip install luigi law
+    python3 -m pip install apache-beam
  
 %environment
     export PIP_DEFAULT_TIMEOUT=500
