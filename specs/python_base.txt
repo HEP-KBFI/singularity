@@ -20,6 +20,12 @@ girder-client
 hdbscan
 healpy
 hydra-core
+hydra-colorlog
+hydra-optuna-sweeper
+pylint
+pyrootutils
+rich
+ruff
 imageio
 imageio-ffmpeg
 ipyparallel
@@ -62,3 +68,8 @@ uproot
 vector
 xxhash
 zenodo_get
+ragged
+weaver-core
+luigi
+law
+jetnet

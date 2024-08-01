@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: pytorch/pytorch:2.3.0-cuda12.1-cudnn8-devel
+From: pytorch/pytorch:2.4.0-cuda12.4-cudnn9-devel
 
 %files
     specs/python_base.txt /opt/python_base.txt
@@ -19,7 +19,7 @@ From: pytorch/pytorch:2.3.0-cuda12.1-cudnn8-devel
 
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
-    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
+    # python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
     python3 -m pip install transformers datasets
     python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
     python3 -m pip install torch_runstats
@@ -39,10 +39,10 @@ From: pytorch/pytorch:2.3.0-cuda12.1-cudnn8-devel
     python3 -m pip install comet_ml
     python3 -m pip install pynvml
     python3 -m pip install wandb
-    python3 -m pip install lightning
+    python3 -m pip install lightning pytorch-lightning
     python3 -m pip install nvidia-ml-py3
-    python3 -m pip install luigi law
     python3 -m pip install apache-beam
+    python3 -m pip install torchdyn torchmetrics torchvision
 
     cd /usr/local/
     git clone https://github.com/minyoungg/vqtorch
