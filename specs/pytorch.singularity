@@ -23,25 +23,14 @@ From: pytorch/pytorch:2.4.0-cuda12.4-cudnn9-devel
     python3 -m pip install transformers datasets
     python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
     python3 -m pip install torch_runstats
-    python3 -m pip install scikit-image
-    python3 -m pip install absl-py
-    python3 -m pip install sporco
-    python3 -m pip install ml-collections
     python3 -m pip install keras-core
     python3 -m pip install keras-cv
     python3 -m pip install tensorflow
     python3 -m pip install tensorflow-datasets
-    python3 -m pip install packaging ninja
     python3 -m pip install triton
-    python3 -m pip install hls4ml[profiling]
     python3 -m pip install open3d-cpu
     python3 -m pip install ray[default] ray[train] ray[tune] ray[cluster]
-    python3 -m pip install comet_ml
-    python3 -m pip install pynvml
-    python3 -m pip install wandb
     python3 -m pip install lightning pytorch-lightning
-    python3 -m pip install nvidia-ml-py3
-    python3 -m pip install apache-beam
     python3 -m pip install torchdyn torchmetrics torchvision
     python3 -m pip install opencv_python
     python3 -m pip install Pillow

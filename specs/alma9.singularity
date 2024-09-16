@@ -1,0 +1,13 @@
+Bootstrap: docker
+
+From: ghcr.io/key4hep/key4hep-images/alma9:latest
+
+%files
+    /scratch/persistent/joosep/cvmfs_shrinkwrap/cvmfs_dump /cvmfs
+
+%post
+
+%environment
+
+%runscript
+    /bin/bash 
