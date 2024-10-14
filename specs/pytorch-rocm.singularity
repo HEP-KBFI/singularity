@@ -13,10 +13,19 @@ From: rocm/pytorch:rocm6.2_ubuntu20.04_py3.9_pytorch_release_2.3.0
     DEBIAN_FRONTEND=noninteractive apt install -y wget
     DEBIAN_FRONTEND=noninteractive apt install -y python3-dev
 
+    DEBIAN_FRONTEND=noninteractive apt install -y libblas3 libblas-dev liblapack3 liblapack-dev libatlas3-base libatlas-base-dev
+    DEBIAN_FRONTEND=noninteractive apt install -y libtcmalloc-minimal4
+    DEBIAN_FRONTEND=noninteractive apt install -y libgl1-mesa-glx
+    DEBIAN_FRONTEND=noninteractive apt install -y texlive
+    DEBIAN_FRONTEND=noninteractive apt install -y make cmake parallel gcc g++ gfortran binutils
+
+
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
+    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.4.0+cu121.html
     python3 -m pip install transformers datasets
-    python3 -m pip install onnx onnxruntime
+    python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
+    python3 -m pip install torch_runstats
     python3 -m pip install scikit-image
     python3 -m pip install absl-py
     python3 -m pip install sporco
@@ -25,9 +34,24 @@ From: rocm/pytorch:rocm6.2_ubuntu20.04_py3.9_pytorch_release_2.3.0
     python3 -m pip install keras-core
     python3 -m pip install keras-cv
     python3 -m pip install tensorflow-datasets
+    python3 -m pip install triton
+    python3 -m pip install open3d-cpu
+    python3 -m pip install ray[default] ray[train] ray[tune] ray[cluster]
+    python3 -m pip install lightning pytorch-lightning
+    python3 -m pip install torchdyn torchmetrics torchvision
+    python3 -m pip install opencv_python
+    python3 -m pip install Pillow
     python3 -m pip install packaging ninja
-    python3 -m pip install ray[default] ray[train] ray[tune]
     python3 -m pip install comet_ml
+    python3 -m pip install coremltools
+    python3 -m pip install thop
+    python3 -m pip install pycocotools
+
+    cd /usr/local/
+    git clone https://github.com/minyoungg/vqtorch
+    cd vqtorch
+    python3 -m pip install -e .
+ 
 
 %environment
     export PIP_DEFAULT_TIMEOUT=500
