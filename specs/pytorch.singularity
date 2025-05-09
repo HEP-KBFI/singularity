@@ -35,6 +35,7 @@ From: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-devel
     python3 -m pip install lightning pytorch-lightning
     python3 -m pip install torchdyn torchmetrics torchvision
     python3 -m pip install cupy-cuda12x
+    python3 -m pip install dvc
 
     cd /usr/local/
     git clone https://github.com/minyoungg/vqtorch
