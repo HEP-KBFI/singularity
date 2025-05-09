@@ -49,6 +49,7 @@ ml-collections
 mnist
 mpl_scatter_density
 mplhep
+mpmath
 networkx
 ninja
 nltk

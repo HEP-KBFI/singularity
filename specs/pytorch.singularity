@@ -18,8 +18,10 @@ From: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-devel
     apt install -y texlive
     apt install -y libcudnn9-cuda-12
 
+
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
+    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.5.1+cu124.html 
     python3 -m pip install transformers datasets
     python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
     python3 -m pip install --prefix /opt/onnxruntime-gpu onnxruntime-gpu
@@ -36,6 +38,12 @@ From: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-devel
     python3 -m pip install torchdyn torchmetrics torchvision
     python3 -m pip install cupy-cuda12x
     python3 -m pip install dvc
+    python3 -m pip install opencv_python
+    python3 -m pip install Pillow
+    python3 -m pip install scikit-image
+    python3 -m pip install coremltools
+    python3 -m pip install thop
+    python3 -m pip install pycocotools
 
     cd /usr/local/
     git clone https://github.com/minyoungg/vqtorch
