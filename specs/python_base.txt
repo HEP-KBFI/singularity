@@ -35,14 +35,14 @@ imageio-ffmpeg
 ipyparallel
 isort
 jetnet
-jupyter
-jupyterlab
+jupyterlab==4.5.0a0
 kaleido
 law
 line_profiler
 lmfit
 luigi
 lz4
+marimo
 matplotlib
 memory_profiler
 ml-collections
@@ -53,7 +53,6 @@ mpmath
 networkx
 ninja
 nltk
-notebook
 numba
 numpy
 nvidia-ml-py3

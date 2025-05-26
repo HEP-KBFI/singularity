@@ -36,14 +36,17 @@ From: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-devel
     python3 -m pip install ray[default] ray[train] ray[tune] ray[cluster]
     python3 -m pip install lightning pytorch-lightning
     python3 -m pip install torchdyn torchmetrics torchvision
+    python3 -m pip install geomloss
     python3 -m pip install cupy-cuda12x
-    python3 -m pip install dvc
+    python3 -m pip install dvc[webdav]
     python3 -m pip install opencv_python
     python3 -m pip install Pillow
     python3 -m pip install scikit-image
     python3 -m pip install coremltools
     python3 -m pip install thop
     python3 -m pip install pycocotools
+    python3 -m pip install torch-tb-profiler
+    python3 -m pip install cuml-cu12
 
     cd /usr/local/
     git clone https://github.com/minyoungg/vqtorch
