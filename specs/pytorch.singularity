@@ -16,12 +16,16 @@ From: pytorch/pytorch:2.7.1-cuda12.6-cudnn9-devel
     apt install -y wget
     apt install -y libgl1-mesa-glx
     apt install -y texlive
+    apt install -y libcudnn9-cuda-12
+
 
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
-    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.7.0+cu126.html
+    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.5.1+cu124.html 
     python3 -m pip install transformers datasets
     python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
+    python3 -m pip install --prefix /opt/onnxruntime-gpu onnxruntime-gpu
+    python3 -m pip install --prefix /opt/onnxruntime-openvino onnxruntime-openvino
     python3 -m pip install torch_runstats
     python3 -m pip install keras-core
     python3 -m pip install keras-cv
@@ -32,6 +36,9 @@ From: pytorch/pytorch:2.7.1-cuda12.6-cudnn9-devel
     python3 -m pip install ray[default] ray[train] ray[tune] ray[cluster]
     python3 -m pip install lightning pytorch-lightning
     python3 -m pip install torchdyn torchmetrics torchvision
+    python3 -m pip install geomloss
+    python3 -m pip install cupy-cuda12x
+    python3 -m pip install dvc[webdav]
     python3 -m pip install opencv_python
     python3 -m pip install Pillow
     python3 -m pip install scikit-image
@@ -39,6 +46,8 @@ From: pytorch/pytorch:2.7.1-cuda12.6-cudnn9-devel
     python3 -m pip install thop
     python3 -m pip install pycocotools
     python3 -m pip install torchjd
+    python3 -m pip install torch-tb-profiler
+    python3 -m pip install cuml-cu12
 
     cd /usr/local/
     git clone https://github.com/minyoungg/vqtorch

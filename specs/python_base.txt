@@ -42,6 +42,7 @@ line_profiler
 lmfit
 luigi
 lz4
+marimo
 matplotlib
 memory_profiler
 ml-collections
