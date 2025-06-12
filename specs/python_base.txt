@@ -35,8 +35,7 @@ imageio-ffmpeg
 ipyparallel
 isort
 jetnet
-jupyter
-jupyterlab
+jupyterlab==4.3.7
 kaleido
 law
 line_profiler
@@ -53,7 +52,7 @@ mpmath
 networkx
 ninja
 nltk
-notebook
+notebook==7.3.3
 numba
 numpy
 nvidia-ml-py3

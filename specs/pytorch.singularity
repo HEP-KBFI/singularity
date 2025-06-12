@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: pytorch/pytorch:2.4.0-cuda12.4-cudnn9-devel
+From: pytorch/pytorch:2.7.1-cuda12.6-cudnn9-devel
 
 %files
     specs/python_base.txt /opt/python_base.txt
@@ -19,7 +19,7 @@ From: pytorch/pytorch:2.4.0-cuda12.4-cudnn9-devel
 
     python3 -m pip install --upgrade pip
     python3 -m pip install -r /opt/python_base.txt
-    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.4.0+cu121.html
+    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.7.0+cu126.html
     python3 -m pip install transformers datasets
     python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
     python3 -m pip install torch_runstats
@@ -38,6 +38,7 @@ From: pytorch/pytorch:2.4.0-cuda12.4-cudnn9-devel
     python3 -m pip install coremltools
     python3 -m pip install thop
     python3 -m pip install pycocotools
+    python3 -m pip install torchjd
 
     cd /usr/local/
     git clone https://github.com/minyoungg/vqtorch
