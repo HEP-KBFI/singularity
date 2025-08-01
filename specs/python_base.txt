@@ -11,6 +11,7 @@ bokeh
 boost-histogram
 comet_ml
 corner
+correctionlib
 dask
 dcor
 distributed
