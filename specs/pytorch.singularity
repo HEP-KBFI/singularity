@@ -47,7 +47,7 @@ From: pytorch/pytorch:2.7.1-cuda12.8-cudnn9-devel
     python3 -m pip install pycocotools
     python3 -m pip install torch-tb-profiler
     python3 -m pip install cuml-cu12
-    python3 -m pip install --upgrade numba numpy uproot
+    python3 -m pip install --upgrade numba numpy uproot jupyterlab
 
     cd /usr/local/
     git clone https://github.com/minyoungg/vqtorch

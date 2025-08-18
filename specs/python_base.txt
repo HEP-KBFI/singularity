@@ -36,7 +36,7 @@ imageio-ffmpeg
 ipyparallel
 isort
 jetnet
-jupyterlab==4.5.0a0
+jupyterlab
 kaleido
 law
 line_profiler
