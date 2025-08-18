@@ -54,6 +54,7 @@ mpmath
 networkx
 ninja
 nltk
+notebook==7.3.3
 numba
 numpy
 nvidia-ml-py3
