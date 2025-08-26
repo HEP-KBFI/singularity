@@ -1,5 +1,6 @@
 MarkupSafe
 POT
+Pillow
 PyYAML
 absl-py
 apache-beam
@@ -10,18 +11,21 @@ black
 bokeh
 boost-histogram
 comet_ml
+coremltools
 corner
 correctionlib
 dask
 dcor
 distributed
 docopt
+dvc[webdav]
 emcee
 energyflow
 fastjet
 fastparquet
 flake8
 fsspec
+geomloss
 gif
 girder-client
 h5py
@@ -40,6 +44,7 @@ jupyterlab
 kaleido
 law
 line_profiler
+lmdb
 lmfit
 luigi
 lz4
@@ -51,6 +56,7 @@ mnist
 mpl_scatter_density
 mplhep
 mpmath
+nbdev
 networkx
 ninja
 nltk
@@ -58,6 +64,8 @@ notebook==7.3.3
 numba
 numpy
 nvidia-ml-py3
+open3d-cpu
+opencv_python
 packaging
 pandas
 papermill
@@ -66,6 +74,7 @@ particle
 plotly
 pre-commit
 pyarrow
+pycocotools
 pydot
 pygraphviz
 pyhepmc
@@ -80,12 +89,14 @@ ragged
 rich
 ruff
 scikit-image
+scikit-image
 scikit-learn
 scipy
 seaborn
 sporco
 tables
 tensorboard
+thop
 tqdm
 uproot
 vector
