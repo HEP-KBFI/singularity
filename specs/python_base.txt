@@ -52,6 +52,7 @@ marimo
 matplotlib
 memory_profiler
 ml-collections
+mlcroissant
 mnist
 mpl_scatter_density
 mplhep
