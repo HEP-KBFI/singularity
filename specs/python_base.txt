@@ -103,6 +103,7 @@ uproot
 vector
 wandb
 weaver-core
+xgboost
 xxhash
 zenodo_get
 zuko
