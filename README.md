@@ -39,3 +39,10 @@ singularity build --fakeroot base.simg specs/base.singularity
 
 ## Adding software to the image
 Add the necessary libraries using a pull request by editing the [spec file](specs).
+
+
+# Misc
+
+## Building mlpf-torchsparse
+
+The [torchsparse](https://github.com/mit-han-lab/torchsparse) build should be done on a GPU node for it to have GPU support.
