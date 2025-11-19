@@ -1,0 +1,67 @@
+Bootstrap: docker
+
+From: pytorch/pytorch:2.1.0-cuda12.1-cudnn8-devel
+
+%files
+    specs/python_base.txt /opt/python_base.txt
+
+%post
+    apt update -y --fix-missing
+    apt upgrade -y
+    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt install -y tzdata 
+    apt install -y make cmake parallel gcc g++ gfortran binutils
+    apt install -y libblas3 libblas-dev liblapack3 liblapack-dev libatlas3-base libatlas-base-dev
+    apt install -y libtcmalloc-minimal4
+    apt install -y graphviz graphviz-dev
+    apt install -y git
+    apt install -y wget
+    apt install -y libgl1-mesa-glx
+    apt install -y texlive
+
+    apt install -y libsparsehash-dev
+
+
+    python3 -m pip install --upgrade pip
+    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.1.0+cu121.html
+    python3 -m pip install transformers datasets
+    python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
+    python3 -m pip install --prefix /opt/onnxruntime-gpu onnxruntime-gpu
+    python3 -m pip install --prefix /opt/onnxruntime-openvino onnxruntime-openvino
+    python3 -m pip install torch_runstats
+    python3 -m pip install keras-core
+    python3 -m pip install keras-cv
+    python3 -m pip install tensorflow
+    python3 -m pip install tensorflow-datasets
+    python3 -m pip install triton
+    python3 -m pip install ray[default] ray[train] ray[tune] ray[cluster]
+    python3 -m pip install lightning pytorch-lightning
+    python3 -m pip install torchdyn torchmetrics torchvision
+    python3 -m pip install cupy-cuda12x
+    python3 -m pip install torchjd torch-tb-profiler
+    python3 -m pip install -r /opt/python_base.txt
+    python3 -m pip install --upgrade numba numpy uproot jupyterlab
+    python3 -m pip install --upgrade setuptools wheel
+
+    cd /usr/local/
+    git clone https://github.com/minyoungg/vqtorch
+    cd vqtorch
+    python3 -m pip install -e .
+
+    cd /usr/local
+    git clone https://github.com/mit-han-lab/torchsparse.git
+    cd torchsparse
+    pip install -r requirements.txt
+    git checkout v2.0.0
+    python3 -m pip install --force-reinstall "numpy<2" \
+        "torchvision==0.16.*" \
+        "torchmetrics==1.2.*" \
+        "pytorch-lightning==2.1.*" \
+        "transformers==4.36.*"
+    python3 setup.py install
+
+%environment
+    export PIP_DEFAULT_TIMEOUT=500
+    export LC_ALL=""
+
+%runscript
+    /bin/bash
