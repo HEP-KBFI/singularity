@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: pytorch/pytorch:2.8.0-cuda12.8-cudnn9-devel
+From: pytorch/pytorch:2.9.1-cuda12.8-cudnn9-devel
 
 %files
     specs/python_base.txt /opt/python_base.txt
@@ -17,7 +17,7 @@ From: pytorch/pytorch:2.8.0-cuda12.8-cudnn9-devel
     apt install -y libgl1-mesa-glx
     apt install -y texlive
     apt install -y libcudnn9-cuda-12
-
+    apt install -y libsparsehash-dev
 
     python3 -m pip install --upgrade pip
     python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.8.0+cu128.html 
@@ -38,6 +38,8 @@ From: pytorch/pytorch:2.8.0-cuda12.8-cudnn9-devel
     python3 -m pip install torchjd torch-tb-profiler
     python3 -m pip install -r /opt/python_base.txt
     python3 -m pip install --upgrade numba numpy uproot jupyterlab
+    python3 -m pip install onnx_graphsurgeon
+    python3 -m pip install snakemake snakemake-executor-plugin-slurm
 
     cd /usr/local/
     git clone https://github.com/minyoungg/vqtorch
