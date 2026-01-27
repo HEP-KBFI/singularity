@@ -64,6 +64,7 @@ nltk
 notebook==7.3.3
 numba
 numpy
+nvidia-ml-py
 nvidia-ml-py3
 open3d-cpu
 opencv_python
@@ -83,7 +84,6 @@ pyhf
 pylint
 pymultinest
 pynbody
-pynvml
 pyrootutils
 pytest
 ragged

@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: pytorch/pytorch:2.9.1-cuda12.8-cudnn9-devel
+From: pytorch/pytorch:2.10.0-cuda12.8-cudnn9-devel
 
 %files
     specs/python_base.txt /opt/python_base.txt
@@ -14,41 +14,46 @@ From: pytorch/pytorch:2.9.1-cuda12.8-cudnn9-devel
     apt install -y graphviz graphviz-dev
     apt install -y git
     apt install -y wget
-    apt install -y libgl1-mesa-glx
+    apt install -y libglx-mesa0 libgl1
     apt install -y texlive
     apt install -y libcudnn9-cuda-12
     apt install -y libsparsehash-dev
+    apt install -y libboost-all-dev
+    apt install -y python3.12-venv
 
-    python3 -m pip install --upgrade pip
-    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.8.0+cu128.html 
-    python3 -m pip install transformers datasets
-    python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
-    python3 -m pip install --prefix /opt/onnxruntime-gpu onnxruntime-gpu
-    python3 -m pip install --prefix /opt/onnxruntime-openvino onnxruntime-openvino
-    python3 -m pip install torch_runstats
-    python3 -m pip install keras-core
-    python3 -m pip install keras-cv
-    python3 -m pip install tensorflow
-    python3 -m pip install tensorflow-datasets
-    python3 -m pip install triton
-    python3 -m pip install ray[default] ray[train] ray[tune] ray[cluster]
-    python3 -m pip install lightning pytorch-lightning
-    python3 -m pip install torchdyn torchmetrics torchvision
-    python3 -m pip install cupy-cuda12x
-    python3 -m pip install torchjd torch-tb-profiler
-    python3 -m pip install -r /opt/python_base.txt
-    python3 -m pip install --upgrade numba numpy uproot jupyterlab
-    python3 -m pip install onnx_graphsurgeon
-    python3 -m pip install snakemake snakemake-executor-plugin-slurm
+    python3 -m venv /opt/local/venv
+    /opt/local/venv/bin/python3 -m pip install --upgrade pip
+    /opt/local/venv/bin/python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.8.0+cu128.html 
+    /opt/local/venv/bin/python3 -m pip install transformers datasets
+    /opt/local/venv/bin/python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
+    /opt/local/venv/bin/python3 -m pip install --prefix /opt/onnxruntime-gpu onnxruntime-gpu
+    /opt/local/venv/bin/python3 -m pip install --prefix /opt/onnxruntime-openvino onnxruntime-openvino
+    /opt/local/venv/bin/python3 -m pip install torch_runstats
+    /opt/local/venv/bin/python3 -m pip install keras-core
+    /opt/local/venv/bin/python3 -m pip install keras-cv
+    /opt/local/venv/bin/python3 -m pip install tensorflow
+    /opt/local/venv/bin/python3 -m pip install tensorflow-datasets
+    /opt/local/venv/bin/python3 -m pip install triton
+    /opt/local/venv/bin/python3 -m pip install ray[default] ray[train] ray[tune] ray[cluster]
+    /opt/local/venv/bin/python3 -m pip install lightning pytorch-lightning
+    /opt/local/venv/bin/python3 -m pip install torchdyn torchmetrics torchvision
+    /opt/local/venv/bin/python3 -m pip install cupy-cuda12x
+    /opt/local/venv/bin/python3 -m pip install torchjd torch-tb-profiler
+    /opt/local/venv/bin/python3 -m pip install --upgrade numba numpy uproot jupyterlab
+    /opt/local/venv/bin/python3 -m pip install onnx_graphsurgeon
+    /opt/local/venv/bin/python3 -m pip install snakemake snakemake-executor-plugin-slurm
+    /opt/local/venv/bin/python3 -m pip install CLUEstering
+    /opt/local/venv/bin/python3 -m pip install -r /opt/python_base.txt
 
-    cd /usr/local/
+    cd /opt/local/
     git clone https://github.com/minyoungg/vqtorch
     cd vqtorch
-    python3 -m pip install -e .
+    /opt/local/venv/bin/python3 -m pip install -e .
  
 %environment
     export PIP_DEFAULT_TIMEOUT=500
     export LC_ALL=""
+    export PATH=/opt/local/venv/bin
 
 %runscript
     /bin/bash
