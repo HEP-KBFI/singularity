@@ -1,0 +1,12 @@
+Bootstrap: localimage
+From: /home/software/comp/alma_20251229_1.sif
+
+%labels
+
+%files
+
+%post
+dnf -q -y install python3.13 python3.13-devel python3.13-pip
+python3.13 -m pip install snakemake snakemake-executor-plugin-slurm
+
+%runscript
