@@ -28,6 +28,7 @@ fsspec
 geomloss
 gif
 girder-client
+gradio
 h5py
 hdbscan
 healpy

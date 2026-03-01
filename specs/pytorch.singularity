@@ -1,59 +1,134 @@
 Bootstrap: docker
-
 From: pytorch/pytorch:2.10.0-cuda12.8-cudnn9-devel
+
+%labels
+    Maintainer Joosep
+    Version 1.0
+    Description PyTorch 2.10.0 container with extensive ML and HEP libraries
+
+%help
+    This container provides a PyTorch 2.10.0 environment with CUDA 12.8 support.
+    It includes a virtual environment at /opt/local/venv containing:
+    - PyTorch Geometric (PyG)
+    - Transformers, Datasets
+    - ONNX Runtime (GPU and OpenVINO variants in /opt)
+    - Ray (Train, Tune, Cluster)
+    - Lightning, Cupy, Snakemake, and many HEP-related Python packages.
+    
+    The virtual environment is automatically added to the PATH.
 
 %files
     specs/python_base.txt /opt/python_base.txt
 
 %post
-    apt update -y --fix-missing
-    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt install -y tzdata 
-    apt install -y make cmake parallel gcc g++ gfortran binutils
-    apt install -y libblas3 libblas-dev liblapack3 liblapack-dev libatlas3-base libatlas-base-dev
-    apt install -y libtcmalloc-minimal4
-    apt install -y graphviz graphviz-dev
-    apt install -y git
-    apt install -y wget
-    apt install -y libglx-mesa0 libgl1
-    apt install -y texlive
-    apt install -y libcudnn9-cuda-12
-    apt install -y libsparsehash-dev
-    apt install -y libboost-all-dev
-    apt install -y python3.12-venv
+    export DEBIAN_FRONTEND=noninteractive
+    export TZ=Etc/UTC
 
+    # Install system dependencies and clean up apt cache to reduce image size
+    apt-get update -y && apt-get install -y --no-install-recommends \
+        tzdata \
+        make \
+        cmake \
+        parallel \
+        gcc \
+        g++ \
+        gfortran \
+        binutils \
+        libblas3 \
+        libblas-dev \
+        liblapack3 \
+        liblapack-dev \
+        libatlas3-base \
+        libatlas-base-dev \
+        libtcmalloc-minimal4 \
+        graphviz \
+        graphviz-dev \
+        git \
+        wget \
+        libglx-mesa0 \
+        libgl1 \
+        texlive \
+        libcudnn9-cuda-12 \
+        libsparsehash-dev \
+        libboost-all-dev \
+        python3.12-venv \
+        && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+    # Create and setup virtual environment
     python3 -m venv /opt/local/venv
-    /opt/local/venv/bin/python3 -m pip install --upgrade pip
-    /opt/local/venv/bin/python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.8.0+cu128.html 
-    /opt/local/venv/bin/python3 -m pip install transformers datasets
-    /opt/local/venv/bin/python3 -m pip install onnx onnxruntime onnxscript onnxconverter_common
-    /opt/local/venv/bin/python3 -m pip install --prefix /opt/onnxruntime-gpu onnxruntime-gpu
-    /opt/local/venv/bin/python3 -m pip install --prefix /opt/onnxruntime-openvino onnxruntime-openvino
-    /opt/local/venv/bin/python3 -m pip install torch_runstats
-    /opt/local/venv/bin/python3 -m pip install keras-core
-    /opt/local/venv/bin/python3 -m pip install keras-cv
-    /opt/local/venv/bin/python3 -m pip install tensorflow
-    /opt/local/venv/bin/python3 -m pip install tensorflow-datasets
-    /opt/local/venv/bin/python3 -m pip install triton
-    /opt/local/venv/bin/python3 -m pip install ray[default] ray[train] ray[tune] ray[cluster]
-    /opt/local/venv/bin/python3 -m pip install lightning pytorch-lightning
-    /opt/local/venv/bin/python3 -m pip install torchdyn torchmetrics torchvision
-    /opt/local/venv/bin/python3 -m pip install cupy-cuda12x
-    /opt/local/venv/bin/python3 -m pip install torchjd torch-tb-profiler
-    /opt/local/venv/bin/python3 -m pip install --upgrade numba numpy uproot jupyterlab
-    /opt/local/venv/bin/python3 -m pip install onnx_graphsurgeon
-    /opt/local/venv/bin/python3 -m pip install snakemake snakemake-executor-plugin-slurm
-    /opt/local/venv/bin/python3 -m pip install CLUEstering
-    /opt/local/venv/bin/python3 -m pip install -r /opt/python_base.txt
+    /opt/local/venv/bin/python3 -m pip install --no-cache-dir --upgrade pip
 
+    # Install ML libraries in groups to improve readability and caching
+    # Note: Using --no-cache-dir to prevent baking GBs of pip cache into the image
+    /opt/local/venv/bin/python3 -m pip install --no-cache-dir \
+        torch-scatter \
+        torch-sparse \
+        torch-cluster \
+        torch-spline-conv \
+        torch-geometric \
+        -f https://data.pyg.org/whl/torch-2.8.0+cu128.html 
+
+    /opt/local/venv/bin/python3 -m pip install --no-cache-dir \
+        transformers \
+        datasets \
+        torch_runstats \
+        keras-core \
+        keras-cv \
+        tensorflow \
+        tensorflow-datasets \
+        triton \
+        "ray[default]" "ray[train]" "ray[tune]" "ray[cluster]" \
+        lightning \
+        pytorch-lightning \
+        torchdyn \
+        torchmetrics \
+        torchvision \
+        cupy-cuda12x \
+        torchjd \
+        torch-tb-profiler \
+        numba \
+        numpy \
+        uproot \
+        jupyterlab \
+        onnx_graphsurgeon \
+        snakemake \
+        snakemake-executor-plugin-slurm \
+        CLUEstering
+
+    # Deliberate prefix installs for ONNX (preserving your directory structure)
+    /opt/local/venv/bin/python3 -m pip install --no-cache-dir onnx onnxruntime onnxscript onnxconverter_common
+    /opt/local/venv/bin/python3 -m pip install --no-cache-dir --prefix /opt/onnxruntime-gpu onnxruntime-gpu
+    /opt/local/venv/bin/python3 -m pip install --no-cache-dir --prefix /opt/onnxruntime-openvino onnxruntime-openvino
+
+    # Install from requirements file
+    /opt/local/venv/bin/python3 -m pip install --no-cache-dir -r /opt/python_base.txt
+
+    # Specific fixes for known issues
+    # https://github.com/tensorflow/tensorboard/issues/7003#issuecomment-3899135221
+    /opt/local/venv/bin/python3 -m pip install --no-cache-dir "tensorboard>=2.20.0" "setuptools==81.0.0" --force-reinstall
+
+    # Source builds
     cd /opt/local/
     git clone https://github.com/minyoungg/vqtorch
     cd vqtorch
-    /opt/local/venv/bin/python3 -m pip install -e .
- 
+    /opt/local/venv/bin/python3 -m pip install --no-cache-dir -e .
+
 %environment
     export PIP_DEFAULT_TIMEOUT=500
-    export LC_ALL=""
-    export PATH=/opt/local/venv/bin
+    export LC_ALL=C.UTF-8
+    export PATH=/opt/local/venv/bin:$PATH
 
 %runscript
-    /bin/bash
+    exec /bin/bash "$@"
+
+%test
+    export PATH=/opt/local/venv/bin:$PATH
+    # Verify PyTorch installation and version
+    python3 -c "import torch; print('PyTorch version:', torch.__version__)"
+    # Verify Git availability
+    git --version
+    # Verify key HEP and ML libraries
+    python3 -c "import uproot; print('Uproot version:', uproot.__version__)"
+    python3 -c "import torch_geometric; print('PyG version:', torch_geometric.__version__)"
+    # Ensure the virtual environment is correctly activated in the PATH
+    which python3 | grep "/opt/local/venv/bin/python3"
