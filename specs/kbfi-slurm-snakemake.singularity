@@ -1,3 +1,5 @@
+# This image uses the local KBFI slurm worker node image as a base, 
+# which is required to correctly connect to the KBFI slurm cluster.
 Bootstrap: localimage
 From: /home/software/comp/alma_20251229_1.sif
 
