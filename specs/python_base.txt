@@ -91,7 +91,6 @@ ragged
 rich
 ruff
 scikit-image
-scikit-image
 scikit-learn
 scipy
 seaborn

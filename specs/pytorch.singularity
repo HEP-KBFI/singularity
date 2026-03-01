@@ -106,6 +106,9 @@ From: pytorch/pytorch:2.10.0-cuda12.8-cudnn9-devel
     # Specific fixes for known issues
     # https://github.com/tensorflow/tensorboard/issues/7003#issuecomment-3899135221
     /opt/local/venv/bin/python3 -m pip install --no-cache-dir "tensorboard>=2.20.0" "setuptools==81.0.0" --force-reinstall
+    
+    #ensure uproot is the latest, for some reason, the previous installation can result in an out-of-date version 
+    /opt/local/venv/bin/python3 -m pip install --no-cache-dir --upgrade uproot
 
     # Source builds
     cd /opt/local/
