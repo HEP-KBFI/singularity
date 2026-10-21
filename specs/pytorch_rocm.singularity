@@ -1,0 +1,161 @@
+Bootstrap: docker
+
+# ROCm 6.2.3 + PyTorch 2.3.0, Python 3.10.
+#
+# The ROCm version is pinned to the 6.2.x line ON PURPOSE. LUMI's kernel driver
+# sets the ceiling for the ROCm userspace a container may carry, and two
+# independent pieces of evidence put that ceiling at 6.2.x:
+#   * the newest PyTorch container AMD builds for LUMI is rocm-6.2.4, and
+#   * the previously working image on this machine was ROCm 6.2 / torch 2.3.
+# An image built on rocm7.14 imports torch fine and lists gfx90a in
+# torch.cuda.get_arch_list(), but every kernel launch -- including the very
+# first allocation -- fails with hipErrorInvalidImage.
+#
+# Python 3.10 is the minimum this codebase can use: ParTauDETR.py and
+# ParTauDETR_module.py use PEP 604 `X | None` annotations, which raise
+# TypeError on 3.9. 3.10 is the newest interpreter offered on the rocm6.2.x
+# line, so this is the only combination that satisfies both constraints.
+From: rocm/pytorch:rocm6.2.3_ubuntu22.04_py3.10_pytorch_release_2.3.0
+
+
+%files
+    specs/python_mltau_core.txt /opt/python_mltau_core.txt
+    specs/python_base.txt /opt/python_base.txt
+
+%post
+set -e
+
+DEBIAN_FRONTEND=noninteractive apt update -y --fix-missing
+DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt install -y tzdata
+DEBIAN_FRONTEND=noninteractive apt install -y \
+    git wget make cmake parallel gcc g++ gfortran binutils python3-dev \
+    graphviz graphviz-dev \
+    libblas3 libblas-dev liblapack3 liblapack-dev \
+    libtcmalloc-minimal4 libgl1
+# libgl1-mesa-glx was dropped after Ubuntu 22.04; libgl1 replaces it.
+
+python3 -m pip install --upgrade pip
+
+# ---------------------------------------------------------------------------
+# Pin the ROCm torch that ships in the base image.
+#
+# Any pip install whose dependency tree mentions torch (torchvision,
+# torchmetrics, lightning, triton, ...) can otherwise pull a CUDA or CPU wheel
+# from PyPI and silently replace the ROCm build. The container still imports
+# torch and still reports a version -- it just has no GPU. A constraint file
+# turns any such attempt into a hard build failure instead.
+#
+# The old definition did exactly this twice: it installed torchvision and
+# torchmetrics unconstrained, and pulled torch-scatter/sparse/cluster from
+# https://data.pyg.org/whl/torch-2.4.0+cu121.html -- a CUDA index, for a torch
+# version the image did not have.
+# ---------------------------------------------------------------------------
+python3 - > /opt/torch-constraints.txt <<'PY'
+import importlib.metadata as md
+for pkg in ("torch", "torchvision", "torchaudio", "pytorch-triton-rocm", "triton"):
+    try:
+        print(f"{pkg}=={md.version(pkg)}")
+    except md.PackageNotFoundError:
+        pass
+PY
+# Same trick for NumPy, and for the same class of failure. The torch in this
+# base image is compiled against the NumPy 1.x C API; with NumPy 2 present its
+# numpy bridge is disabled, so torch.from_numpy and Tensor.numpy() raise
+# "Numpy is not available" while pure tensor ops keep working. That combination
+# passes a GPU smoke test -- allocation and matmul are fine -- and then dies on
+# the first batch, because 41 of the 45 torch.from_numpy calls in mltau are in
+# build_tensors. Observed on LUMI with numpy 2.2.6 in this image.
+#
+# Constrain rather than downgrade at the end: this way nothing is ever resolved
+# or built against 2.x, and any package that genuinely requires NumPy 2 fails
+# the build loudly instead of silently breaking the dataloader.
+echo "numpy<2" >> /opt/torch-constraints.txt
+
+echo "--- torch build pinned to ---"
+cat /opt/torch-constraints.txt
+export PIP_CONSTRAINT=/opt/torch-constraints.txt
+
+# Core requirements for mltau. A failure here must fail the build.
+python3 -m pip install -r /opt/python_mltau_core.txt
+
+# vqtorch: the vector quantizer of the OmniJet-alpha VQ-VAE tokenizer (gabbro,
+# mltau OmniParT / OmniParTau). Required, so a failure must fail the build.
+# Installed without its dependencies: it pins torchpq, which pulls in CuPy (CUDA
+# only) and is imported lazily, only for k-means codebook initialisation when
+# training a VQ-VAE -- never for a pretrained tokenizer. string-color is its one
+# import-time dependency. Pinned to 02e60a1, the current head of vqtorch, which
+# the CUDA image (pytorch.singularity) also gets from its unpinned clone.
+python3 -m pip install --no-deps "git+https://github.com/minyoungg/vqtorch@02e60a1"
+python3 -m pip install "string-color==1.2.3"
+
+# Wider toolbox, best effort: one unavailable wheel must not stop a training
+# image from being produced.
+: > /opt/pip_extras_failed.txt
+while read -r req; do
+    case "$req" in ''|'#'*) continue ;; esac
+    python3 -m pip install "$req" || echo "$req" >> /opt/pip_extras_failed.txt
+done < /opt/python_base.txt
+
+if [ -s /opt/pip_extras_failed.txt ]; then
+    echo "=== optional packages that FAILED to install ==="
+    cat /opt/pip_extras_failed.txt
+fi
+
+python3 -m pip cache purge || true
+
+%environment
+    export PIP_DEFAULT_TIMEOUT=500
+    export LC_ALL=""
+    # MIOpen writes a kernel cache at runtime. Inside a read-only image the
+    # default location fails, surfacing as opaque HIP errors on the first
+    # convolution. These are only fallbacks: %environment is sourced AFTER the
+    # host environment is imported, so an unconditional export would clobber the
+    # per-job path set by run-lumi.sh. That per-job path is the better one --
+    # concurrent jobs on a node must not share a MIOpen cache.
+    export MIOPEN_USER_DB_PATH=${MIOPEN_USER_DB_PATH:-/tmp/miopen}
+    export MIOPEN_CUSTOM_CACHE_DIR=${MIOPEN_CUSTOM_CACHE_DIR:-$MIOPEN_USER_DB_PATH}
+    export ROCM_PATH=${ROCM_PATH:-/opt/rocm}
+    # keras is not used, but is imported somewhere and crashes without this.
+    export KERAS_BACKEND=torch
+
+%test
+python3 <<'PY'
+import inspect, sys
+assert sys.version_info >= (3, 10), f"need >= 3.10 for PEP 604 annotations, got {sys.version}"
+import numpy
+import torch
+
+# The numpy bridge, not just the import: a NumPy that is too new for this torch
+# leaves `import torch` working and every from_numpy call raising.
+assert numpy.__version__.startswith("1."), f"need numpy 1.x for this torch, got {numpy.__version__}"
+assert torch.from_numpy(numpy.zeros(3, dtype="float32")).shape == (3,), "torch/numpy ABI mismatch"
+assert torch.ones(3).numpy().shape == (3,), "torch/numpy ABI mismatch"
+print("numpy             ", numpy.__version__)
+print("python            ", sys.version.split()[0])
+print("torch             ", torch.__version__)
+print("torch.version.hip ", torch.version.hip)
+print("torch.version.cuda", torch.version.cuda)
+assert torch.version.hip, "torch lost its ROCm build: a pip install replaced it"
+# GPU build targets are deliberately NOT checked here. Builds run on a login
+# node with no GPU, where torch.cuda.get_arch_list() returns [] regardless of
+# what the build contains, so any assertion on it is either vacuous or a false
+# failure. Verify on a compute node instead:
+#     sbatch smoke-gpu-lumi.sh
+# Stage 5 ("first allocation") is the check that matters -- the rocm7.14 image
+# listed gfx90a and still failed every kernel launch.
+import awkward, boost_histogram, comet_ml, hydra, lightning, matplotlib
+import mplhep, numba, omegaconf, pyarrow, scipy, sklearn, tqdm, vector
+from scipy.optimize import linear_sum_assignment  # Hungarian matcher
+from vqtorch.nn import VectorQuant  # OmniJet-alpha tokenizer (gabbro VQ-VAE)
+print("lightning         ", lightning.__version__)
+print("awkward           ", awkward.__version__)
+print("pyarrow           ", pyarrow.__version__)
+print("comet_ml          ", comet_ml.__version__)
+from lightning.pytorch.loggers import CometLogger
+params = list(inspect.signature(CometLogger.__init__).parameters)
+print("CometLogger api   ", "modern (>=2.5)" if "online" in params else "legacy (<2.5)")
+PY
+
+%runscript
+    /bin/bash
+

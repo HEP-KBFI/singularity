@@ -1,3 +1,13 @@
+# Wider analysis toolbox. Installed best-effort by the container build: a wheel
+# that is unavailable for the image's Python version is reported at the end of
+# the build log rather than failing the build.
+#
+# Deliberately NOT listed here: torch, torchvision, torchaudio, triton. They
+# ship with the ROCm base image and installing them from PyPI replaces the ROCm
+# build with a CUDA/CPU one.
+#
+# nvidia-ml-py3 removed: abandoned, and it installs a second `pynvml` module
+# that shadows the maintained nvidia-ml-py.
 MarkupSafe
 POT
 Pillow
@@ -66,7 +76,6 @@ notebook==7.3.3
 numba
 numpy
 nvidia-ml-py
-nvidia-ml-py3
 open3d-cpu
 opencv_python
 packaging

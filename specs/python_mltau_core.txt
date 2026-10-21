@@ -1,0 +1,38 @@
+# Core requirements for the mltau package itself.
+#
+# Derived from the imports actually present under mltau/ -- keep this list
+# minimal so a broken wheel in the wider toolbox cannot break a training image.
+# Version floors are the ones that matter for this codebase, not arbitrary pins:
+#
+#   lightning >= 2.5  CometLogger was reworked in 2.5 to wrap comet_ml.start().
+#                     Both signatures are supported by build_comet_logger, but
+#                     matching the CUDA image keeps behaviour identical on both
+#                     machines.
+#   awkward   >= 2.8  parquet row-group reading via metadata_from_parquet.
+#   pyarrow   >= 18   ParquetFile.read_row_groups for the cached-handle path.
+#   scipy     >= 1.14 linear_sum_assignment for the Hungarian matcher.
+#
+# NOTE: torch / torchvision are deliberately absent. They ship with the ROCm
+# base image; installing them from PyPI would replace the ROCm build with a
+# CUDA or CPU one. The build applies a pip constraint to enforce that.
+
+awkward>=2.8
+vector
+numpy
+scipy>=1.14
+pyarrow>=18
+boost-histogram
+matplotlib
+mplhep
+hydra-core
+omegaconf
+lightning>=2.5
+pytorch-lightning>=2.5
+scikit-learn
+numba
+tqdm
+comet_ml>=3.50
+tensorboard
+huggingface_hub
+nvidia-ml-py
+psutil
